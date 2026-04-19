@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Contact Us</title>
+  </head>
+  <body class="contact-bg-image">
+    <header class="site-header transparent-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-primary">Get Started</a>
+      </div>
+    </header>
+
+    <main class="contact-main-content">
+      <section class="page-headers">
+        <h1 class="page-title">Contact Us</h1>
+        <hr class="title-divider-dark" />
+      </section>
+
+      <section class="contact-grid">
+        <div class="contact-form-wrapper">
+          <form id="contact-form" action="#" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="fullName" class="visually-hidden">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="visually-hidden">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary btn-submit-contact">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <div class="contact-info-wrapper">
+          <div class="contact-info-card">
+            <div class="info-block">
+              <span class="icon-envelope-large" aria-hidden="true"></span>
+              <div class="info-text">
+                <h2 class="info-title">Email Us:</h2>
+                <p class="info-detail">Support@getCivicSync.co.za</p>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <span class="icon-phone-large" aria-hidden="true"></span>
+              <div class="info-text">
+                <h2 class="info-title">Call Us:</h2>
+                <p class="info-detail">+27 123 456 7890</p>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <span class="icon-map-pin-large" aria-hidden="true"></span>
+              <div class="info-text">
+                <h2 class="info-title">Visit Us:</h2>
+                <p class="info-detail">
+                  123 Main Street,<br />Johannesburg, SA
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-map-section">
+        <div class="map-wrapper">
+          <img
+            src="assets/map-placeholder.jpg"
+            alt="Map showing our location"
+            class="map-image"
+          />
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

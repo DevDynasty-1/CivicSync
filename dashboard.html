@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Dashboard</title>
+  </head>
+  <body class="dashboard-bg-image">
+    <header class="site-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-primary">Get Started</a>
+      </div>
+    </header>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Menu</h2>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="triage.html">Triage Wizard</a></li>
+            <li><a href="vault.html">Document vault</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="settings.html">Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-content">
+        <header class="dashboard-header">
+          <h1 class="greeting">Good Morning, Thabo</h1>
+          <p class="greeting-subtitle">
+            You have 2 documents still needing attention.
+          </p>
+        </header>
+
+        <section class="alert-banner alert-warning">
+          <div class="alert-info">
+            <h2 class="alert-title">Action needed</h2>
+            <p class="alert-description">
+              Your Birth certificate was rejected. Reload to continue.
+            </p>
+          </div>
+          <button type="button" class="btn-primary btn-alert-action">
+            Fix now
+          </button>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-card">
+            <h3 class="stat-label">Documents Verified</h3>
+            <p class="stat-value">2 / 4</p>
+          </div>
+
+          <div class="stat-card">
+            <h3 class="stat-label">Application Status</h3>
+            <div class="stat-value">
+              <span class="status-badge badge-progress">In Progress</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <h3 class="stat-label">Booking</h3>
+            <p class="stat-value">Locked</p>
+          </div>
+        </section>
+
+        <section class="document-status-section">
+          <ul class="doc-status-list">
+            <li class="doc-status-item">
+              <span class="doc-name">SA ID book</span>
+              <span class="status-badge badge-verified">Verified</span>
+            </li>
+
+            <li class="doc-status-item">
+              <span class="doc-name">Birth Certificate</span>
+              <span class="status-badge badge-rejected">Rejected</span>
+            </li>
+
+            <li class="doc-status-item">
+              <span class="doc-name">Proof of Address</span>
+              <span class="status-badge badge-pending">Pending</span>
+            </li>
+
+            <li class="doc-status-item">
+              <span class="doc-name">Passport Photo</span>
+              <span class="status-badge badge-missing">Not Uploaded</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="dashboard-bottom-action">
+          <a href="booking.html" class="btn-block-action">
+            <span class="action-text">Booking Calendar</span>
+            <span class="icon-calendar" aria-hidden="true"></span>
+          </a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

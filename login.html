@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Login</title>
+  </head>
+  <body class="auth-bg-image">
+    <main class="auth-wrapper">
+      <div class="auth-card">
+        <section class="auth-left">
+          <div class="auth-logo">
+            <img
+              src="assets/civicsync-logo.svg"
+              alt="CivicSync Logo"
+              class="logo-icon"
+            />
+            <span class="logo-text">CivicSync</span>
+          </div>
+
+          <div class="auth-heading-container">
+            <h1 class="auth-heading">
+              Secure Access to<br />
+              <span class="auth-heading-italic">Government Services</span>
+            </h1>
+          </div>
+        </section>
+
+        <section class="auth-right">
+          <h2 class="form-title">Login into your Account</h2>
+
+          <form id="login-form" action="#" method="POST" class="auth-form">
+            <div class="form-group input-with-icon">
+              <label for="email" class="visually-hidden">Email Address</label>
+              <span class="icon-envelope" aria-hidden="true"></span>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+
+            <div class="form-group input-with-icon">
+              <label for="password" class="visually-hidden">Password</label>
+              <span class="icon-padlock" aria-hidden="true"></span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <div class="form-options">
+              <a href="forgot-password.html" class="forgot-password-link"
+                >forgot password</a
+              >
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-login">
+              Log In
+            </button>
+          </form>
+
+          <div class="divider">
+            <span class="divider-line"></span>
+          </div>
+
+          <p class="auth-footer-text">
+            Don't have an account?
+            <a href="register.html" class="auth-link">Sign Up</a>
+          </p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

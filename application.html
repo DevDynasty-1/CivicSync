@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Application Type</title>
+  </head>
+  <body class="app-type-bg-image">
+    <header class="site-header transparent-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-outline">Get Started</a>
+      </div>
+    </header>
+
+    <main class="app-type-main-content">
+      <section class="page-headers">
+        <span class="pre-title">Application Type</span>
+        <h1 class="page-title">What are you applying for?</h1>
+        <p class="page-subtitle">
+          Your answer determines exactly which document you need.<br />No
+          guessing.
+        </p>
+      </section>
+
+      <form
+        id="app-type-form"
+        action="#"
+        method="POST"
+        class="app-type-form-container"
+      >
+        <div class="selection-grid">
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-first-id"
+              name="appType"
+              value="first-id"
+              class="visually-hidden"
+              required
+            />
+            <label for="type-first-id" class="card-label">
+              <span class="card-heading">First-time ID</span>
+              <span class="card-description"
+                >Never had a South African ID before</span
+              >
+            </label>
+          </div>
+
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-replace-id"
+              name="appType"
+              value="replace-id"
+              class="visually-hidden"
+            />
+            <label for="type-replace-id" class="card-label">
+              <span class="card-heading">ID replacement</span>
+              <span class="card-description">Lost, stolen or damaged ID</span>
+            </label>
+          </div>
+
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-new-passport"
+              name="appType"
+              value="new-passport"
+              class="visually-hidden"
+            />
+            <label for="type-new-passport" class="card-label">
+              <span class="card-heading">Passport-New</span>
+              <span class="card-description">First South African Passport</span>
+            </label>
+          </div>
+
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-renew-passport"
+              name="appType"
+              value="renew-passport"
+              class="visually-hidden"
+            />
+            <label for="type-renew-passport" class="card-label">
+              <span class="card-heading">Passport-Renewal</span>
+              <span class="card-description"
+                >Renewing an existing passport</span
+              >
+            </label>
+          </div>
+
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-birth-cert"
+              name="appType"
+              value="birth-cert"
+              class="visually-hidden"
+            />
+            <label for="type-birth-cert" class="card-label">
+              <span class="card-heading">Birth Certificate</span>
+              <span class="card-description">For self or child under 18</span>
+            </label>
+          </div>
+
+          <div class="selection-card">
+            <input
+              type="radio"
+              id="type-other"
+              name="appType"
+              value="other"
+              class="visually-hidden"
+            />
+            <label for="type-other" class="card-label">
+              <span class="card-heading">Something else</span>
+              <span class="card-description">Marriage, citizenship, other</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-navigation-actions">
+          <button
+            type="button"
+            class="btn-secondary btn-back"
+            onclick="history.back()"
+          >
+            Back
+          </button>
+          <button type="submit" class="btn-primary btn-continue">
+            Continue
+          </button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Create an account</title>
+  </head>
+  <body class="auth-bg-image">
+    <main class="auth-wrapper">
+      <div class="auth-card">
+        <section class="auth-left">
+          <div class="auth-logo">
+            <img
+              src="assets/civicsync-logo.svg"
+              alt="CivicSync Logo"
+              class="logo-icon"
+            />
+            <span class="logo-text">CivicSync</span>
+          </div>
+
+          <div class="auth-heading-container">
+            <h1 class="auth-heading">
+              Secure Access to<br />
+              <span class="auth-heading-italic">Government Services</span>
+            </h1>
+          </div>
+        </section>
+
+        <section class="auth-right">
+          <h2 class="form-title">Create an account</h2>
+
+          <form id="register-form" action="#" method="POST" class="auth-form">
+            <div class="form-group">
+              <label for="fullName" class="visually-hidden">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="idNumber" class="visually-hidden">ID Number</label>
+              <input
+                type="text"
+                id="idNumber"
+                name="idNumber"
+                placeholder="ID Number"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="visually-hidden">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-create-account">
+              Create Account
+            </button>
+          </form>
+
+          <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-text">OR</span>
+            <span class="divider-line"></span>
+          </div>
+
+          <button type="button" class="btn-google" id="btn-google-signup">
+            Continue with Google
+          </button>
+
+          <p class="auth-footer-text">
+            Already have an account?
+            <a href="login.html" class="auth-link">Sign In</a>
+          </p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

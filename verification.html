@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Document Verification</title>
+  </head>
+  <body class="verification-bg-image">
+    <header class="site-header transparent-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-outline">Get Started</a>
+      </div>
+    </header>
+
+    <main class="verification-main-content">
+      <section class="page-headers">
+        <h1 class="page-title">Document Verification</h1>
+      </section>
+
+      <section class="id-card-display">
+        <div class="id-card-wrapper">
+          <img
+            src="assets/sa-id-card-mockup.png"
+            alt="Verified South African ID Card"
+            class="id-card-image"
+          />
+        </div>
+      </section>
+
+      <section class="verification-status-section">
+        <h2 class="success-message">
+          Your documents have been verified successfully!
+        </h2>
+
+        <div class="status-indicators">
+          <div class="status-item">
+            <span class="icon-fingerprint" aria-hidden="true"></span>
+            <span class="status-text">AI Scan Complete</span>
+          </div>
+
+          <div class="status-item">
+            <span class="icon-check-green" aria-hidden="true"></span>
+            <span class="status-text">ID Verified</span>
+          </div>
+
+          <div class="status-item">
+            <span class="icon-check-green" aria-hidden="true"></span>
+            <span class="status-text">Data Secured</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="verify-action-section">
+        <button
+          type="button"
+          class="btn-primary btn-large"
+          id="btn-proceed-bookings"
+          onclick="window.location.href = 'booking.html'"
+        >
+          Proceed to bookings
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
