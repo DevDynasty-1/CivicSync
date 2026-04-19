@@ -1,0 +1,160 @@
+/* 1. CORE THEME (Consistent with Application page) */
+:root {
+    --primary-blue: #38bdf8;
+    --accent-gold: #fbbf24;
+    --dark-bg: #0f172a;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text-muted: #cbd5e1;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* 2. HEADER (Copy-pasted to ensure Top-Left is fixed) */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-icon { height: 35px; width: auto; }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; }
+.btn-outline {
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+/* 3. LOCATION DROPDOWN */
+.location-selector-wrapper {
+    max-width: 500px;
+    margin: 40px auto;
+    position: relative;
+}
+
+.location-dropdown {
+    width: 100%;
+    padding: 15px;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    appearance: none; /* Removes default browser arrow */
+}
+
+/* 4. BOOKING GRID (Calendar + Times) */
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Calendar is wider than time slots */
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 5. CALENDAR STYLING */
+.calendar-widget {
+    background: var(--glass);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+}
+
+.calendar-dates-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.date {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 15px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.date:hover { background: var(--primary-blue); color: var(--dark-bg); }
+
+.date.selected {
+    background: var(--accent-gold);
+    color: var(--dark-bg);
+    font-weight: bold;
+}
+
+/* 6. TIME SLOTS */
+.time-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.time-slot-label {
+    display: block;
+    padding: 15px;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input[type="radio"]:checked + .time-slot-label {
+    background: var(--primary-blue);
+    color: var(--dark-bg);
+    font-weight: bold;
+}
+
+.btn-confirm {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-blue);
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+/* Helper for the hidden radio */
+.visually-hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
