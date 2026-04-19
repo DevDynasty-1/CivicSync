@@ -1,4 +1,4 @@
-/* 1. CORE THEME (Consistent with Application page) */
+/* CORE THEME */
 :root {
     --primary-blue: #38bdf8;
     --accent-gold: #fbbf24;
@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
 }
 
-/* 2. HEADER (Copy-pasted to ensure Top-Left is fixed) */
+/* HEADER */
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -38,7 +38,7 @@ body {
     text-decoration: none;
 }
 
-/* 3. LOCATION DROPDOWN */
+/* LOCATION DROPDOWN */
 .location-selector-wrapper {
     max-width: 500px;
     margin: 40px auto;
@@ -56,7 +56,7 @@ body {
     appearance: none; /* Removes default browser arrow */
 }
 
-/* 4. BOOKING GRID (Calendar + Times) */
+/* BOOKING GRID (Calendar + Times) */
 .booking-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr; /* Calendar is wider than time slots */
@@ -66,7 +66,7 @@ body {
     padding: 20px;
 }
 
-/* 5. CALENDAR STYLING */
+/* CALENDAR STYLING */
 .calendar-widget {
     background: var(--glass);
     padding: 30px;
@@ -114,7 +114,7 @@ body {
     font-weight: bold;
 }
 
-/* 6. TIME SLOTS */
+/* TIME SLOTS */
 .time-options {
     display: flex;
     flex-direction: column;
