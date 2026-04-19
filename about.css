@@ -1,0 +1,98 @@
+/* Global Styles & Background */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; 
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Deep Dark Blue */
+    color: white;
+    min-height: 100vh;
+}
+
+/* Header / Navigation */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: rgba(255, 255, 255, 0.05); /* Glass effect */
+    backdrop-filter: blur(10px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #38bdf8; /* Bright Blue accent */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #cbd5e1;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #fbbf24; /* Gold accent simmilar to our prototype */
+}
+
+/* Get Started Button */
+.btn-primary {
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #fbbf24;
+    transform: scale(1.05);
+}
+
+/* Content & Cards */
+.about-main-content {
+    max-width: 1100px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.info-card:hover {
+    background: rgba(56, 189, 248, 0.05);
+    border-color: #38bdf8;
+}
+
+.card-title {
+    color: #38bdf8;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
