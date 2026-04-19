@@ -1,0 +1,125 @@
+/* COLORS & BASIC THEME */
+:root {
+    --civic-blue: #38bdf8;  
+    --warning-red: #ef4444; /* For the "Rejected" alerts */
+    --success-green: #22c55e; /* For the "Verified" badges */
+    --dark-navy: #0f172a;    /* The deep background color */
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--dark-navy);
+    color: white;
+}
+
+/* THE SIDEBAR (Your Left-Hand Menu) */
+.dashboard-layout {
+    display: flex; /* puts the sidebar and content side-by-side */
+    height: 100vh; /* Makes sure the sidebar goes all the way to the bottom */
+}
+
+.sidebar {
+    width: 250px;
+    background: rgba(255, 255, 255, 0.05); /* glass look */
+    padding: 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav ul {
+    list-style: none; /* Removes the bullet points */
+    padding: 0;
+}
+
+.sidebar-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}
+
+/* This makes the "Dashboard" link stay blue */
+.sidebar-nav a.active {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--civic-blue);
+    font-weight: bold;
+}
+
+/* THE MAIN PART (Where Thabo's info is) */
+.dashboard-content {
+    flex: 1; 
+    padding: 50px;
+    overflow-y: auto; /* Adds a scrollbar if the content is too long */
+}
+
+/* STATUS BADGES (The "Verified" and "Rejected" bubbles) */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge-verified { background: rgba(34, 197, 94, 0.2); color: var(--success-green); }
+.badge-rejected { background: rgba(239, 68, 68, 0.2); color: var(--warning-red); }
+
+/* THE BIG BUTTON AT THE BOTTOM */
+.btn-block-action {
+    display: flex;
+    justify-content: center;
+    background: var(--civic-blue);
+    color: var(--dark-navy);
+    padding: 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.site-header {
+    display: flex;             
+    justify-content: space-between; 
+    align-items: center;       
+    padding: 15px 5%;          
+    background: rgba(15, 23, 42, 0.9); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;               /* Makes sure it stretches across the whole screen */
+    box-sizing: border-box;    /* Keeps the padding from making the bar too wide */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    height: 30px; /* Makes the logo a nice, readable size */
+    width: auto;
+}
+
+.nav-links {
+    display: flex;      
+    list-style: none;   
+    gap: 30px;          /* Puts space between each link */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none; /* Gets rid of the underline */
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
