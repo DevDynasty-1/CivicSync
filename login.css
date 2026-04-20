@@ -1,0 +1,133 @@
+/* COLORS & BASIC THEME */
+:root {
+    --civic-blue: #38bdf8;
+    --accent-gold: #fbbf24;
+    --dark-navy: #0f172a;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text-muted: #cbd5e1;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+/* THE LOGIN CARD (The Container) */
+.auth-card {
+    display: flex; /* Puts the left logo area and the right form area side-by-side */
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    overflow: hidden;
+    max-width: 900px;
+    width: 90%;
+    min-height: 500px;
+}
+
+/* LEFT SIDE (The Brand Area) */
+.auth-left {
+    flex: 1;
+    background: rgba(56, 189, 248, 0.1); 
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-container, .auth-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.logo-icon { height: 40px; }
+.logo-text { font-size: 1.8rem; font-weight: 800; color: var(--civic-blue); }
+
+.auth-heading {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+.auth-heading-italic {
+    color: var(--accent-gold);
+    font-style: italic;
+}
+
+/* RIGHT SIDE (The Form) */
+.auth-right {
+    flex: 1;
+    padding: 60px;
+    background: #111827; 
+}
+
+.form-title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--civic-blue);
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.btn-primary {
+    background: var(--civic-blue);
+    color: var(--dark-navy);
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+}
+
+/* LINKS & FOOTER */
+.form-options {
+    text-align: right;
+}
+
+.forgot-password-link, .auth-link {
+    color: var(--civic-blue);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-footer-text {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.visually-hidden { position: absolute; opacity: 0; pointer-events: none; }

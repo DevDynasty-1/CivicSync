@@ -1,0 +1,125 @@
+/* COLORS & BASIC THEME */
+:root {
+    --civic-blue: #38bdf8;
+    --accent-gold: #fbbf24;
+    --dark-navy: #0f172a;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text-muted: #cbd5e1;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+}
+
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-icon { height: 35px; }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { text-decoration: none; color: white; font-weight: 500; }
+
+/* THE UPLOAD BOX */
+.upload-main-content {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.upload-card {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+/* The Drag & Drop Zone */
+.drag-drop-zone {
+    border: 2px dashed blue; /* Dotted blue border */
+    border-radius: 15px;
+    padding: 50px 20px;
+    background: rgba(56, 189, 248, 0.02);
+    transition: 0.3s;
+    margin-bottom: 30px;
+}
+
+.drag-drop-zone:hover {
+    background: rgba(56, 189, 248, 0.05);
+    border-color: var(--civic-blue);
+}
+
+.drag-drop-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* The "Browse" Label that looks like a button */
+.btn-browse {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-browse:hover {
+    background: white;
+    color: var(--dark-navy);
+}
+
+/* THE DOCUMENT LIST */
+.document-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.doc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.doc-name { font-weight: 500; }
+
+.status-text {
+    font-size: 0.8rem;
+    color: lightgreen; /* Green color for "Uploaded" */
+    font-weight: bold;
+}
+
+/* THE BIG VERIFY BUTTON */
+.btn-large {
+    width: 100%;
+    padding: 18px;
+    background: var(--civic-blue);
+    color: var(--dark-navy);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+}
+
+.visually-hidden { position: absolute; opacity: 0; pointer-events: none; }

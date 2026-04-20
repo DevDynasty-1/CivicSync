@@ -122,8 +122,17 @@ const UIController = {
             window.location.href = "booking.html";
         });
         document.getElementById("btn-learn-more")?.addEventListener("click", () => {
-            document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
+            window.location.href = "about.html";
         });
+        
+        const uploadCard = document.querySelector('.step-card:nth-child(1)');
+        if (uploadCard) {
+            uploadCard.style.cursor = 'pointer';
+            uploadCard.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.location.href = "upload.html";
+            });
+        }
         
         const bookCard = document.querySelector('.step-card:nth-child(2)');
         if (bookCard) {

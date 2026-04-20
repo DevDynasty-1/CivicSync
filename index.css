@@ -105,6 +105,32 @@ body {
     transition: 0.3s;
 }
 
+.bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    padding: 80px 5%;
+}
+
+.feature-block,
+.cta-block {
+    width: 100%;
+    max-width: 800px;
+}
+
+.feature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider-indicator {
+    margin: 0 auto;
+}
+
 .step-card:hover {
     border-color: var(--civic-blue);
     background: rgba(56, 189, 248, 0.05);
