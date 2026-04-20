@@ -48,10 +48,10 @@ body {
 .location-dropdown {
     width: 100%;
     padding: 15px;
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    color: white;
+    color: #0f172a;
     font-size: 1rem;
     appearance: none; /* Removes default browser arrow */
 }

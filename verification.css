@@ -1,0 +1,110 @@
+/* COLORS & BASIC THEME */
+:root {
+    --civic-blue: #38bdf8;
+    --success-green: #22c55e;
+    --dark-navy: #0f172a;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+}
+
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-icon { height: 35px; }
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { text-decoration: none; color: white; font-weight: 500; }
+
+/* MAIN CONTENT*/
+.verification-main-content {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+/* THE ID CARD MOCKUP */
+.id-card-display {
+    margin-bottom: 50px;
+}
+
+.id-card-wrapper {
+    background: var(--glass);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: inline-block;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.id-card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* SUCCESS MESSAGES & ICONS */
+.success-message {
+    color: var(--success-green);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.status-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+/* THE BIG PROCEED BUTTON */
+.btn-large {
+    width: 100%;
+    padding: 18px;
+    background: var(--civic-blue);
+    color: var(--dark-navy);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+    transition: 0.3s;
+}
+
+.btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(56, 189, 248, 0.3);
+}
