@@ -196,54 +196,11 @@ bookingForm.addEventListener('submit', (e) => {
 
   showToast(`Booking confirmed for ${bookingDetails.date} at ${bookingDetails.time}!`, 'success');
 
-  // In a real app this would redirect to a confirmation page
+  // Redirect directly to the dashboard after booking
   setTimeout(() => {
-    showConfirmationModal(bookingDetails);
+    window.location.href = 'dashboard.html';
   }, 1400);
 });
-
-// --- CONFIRMATION MODAL ---
-
-function showConfirmationModal(details) {
-  const overlay = document.createElement('div');
-  overlay.style.cssText = `
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 9999;
-  `;
-
-  overlay.innerHTML = `
-    <div style="
-      background: #1e293b;
-      border: 1px solid rgba(56,189,248,0.3);
-      border-radius: 20px;
-      padding: 40px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      color: white;
-    ">
-      <div style="font-size:3rem; margin-bottom:16px;">✓</div>
-      <h2 style="color:#38bdf8; margin:0 0 8px;">Booking Confirmed</h2>
-      <p style="color:#cbd5e1; margin-bottom:24px;">Your appointment has been booked successfully.</p>
-      <div style="background:rgba(255,255,255,0.05); border-radius:12px; padding:20px; text-align:left; margin-bottom:24px; font-size:0.9rem; line-height:2;">
-        <div><span style="color:#cbd5e1;">Location:</span> <strong>${details.location}</strong></div>
-        <div><span style="color:#cbd5e1;">Date:</span> <strong>${details.date}</strong></div>
-        <div><span style="color:#cbd5e1;">Time:</span> <strong>${details.time}</strong></div>
-        <div><span style="color:#cbd5e1;">Reference:</span> <strong style="color:#fbbf24;">${details.ref}</strong></div>
-      </div>
-      <p style="color:#cbd5e1; font-size:0.85rem; margin-bottom:24px;">Screenshot or note your reference number. Bring all verified documents to your appointment.</p>
-      <button onclick="this.closest('div[style]').parentElement.remove()" style="
-        background:#38bdf8; color:#0f172a; border:none;
-        padding:12px 32px; border-radius:10px;
-        font-weight:700; font-size:1rem; cursor:pointer; width:100%;
-      ">Done</button>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-}
 
 // Generate a short reference number
 function generateRef() {

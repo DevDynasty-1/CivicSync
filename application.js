@@ -1,6 +1,8 @@
 // application.js — CivicSync Triage Wizard
 
 // Document checklist per application type
+//still need to add API for document verification
+
 const checklists = {
   'first-id': [
     'Original birth certificate (unabridged)',

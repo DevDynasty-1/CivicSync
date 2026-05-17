@@ -5,6 +5,28 @@ body {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Deep Dark Blue */
     color: white;
     min-height: 100vh;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* PAGE TRANSITION ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Header / Navigation */
@@ -35,7 +57,7 @@ body {
 .nav-links a {
     text-decoration: none;
     color: #cbd5e1;
-    transition: 0.3s;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover, .nav-links a.active {
@@ -50,12 +72,13 @@ body {
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
     background: #fbbf24;
     transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
 /* Content & Cards */
@@ -83,7 +106,7 @@ body {
     padding: 40px;
     border-radius: 20px;
     text-align: left;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .info-card:hover {
