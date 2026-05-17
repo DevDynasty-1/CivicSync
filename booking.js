@@ -468,6 +468,7 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
   };
 
   sessionStorage.setItem('civicsync_booking', JSON.stringify(bookingDetails));
+  sessionStorage.setItem('civicsync_booking_completed', 'true');
 
   // Disable button while processing
   const btn = document.getElementById('btn-confirm-booking');
@@ -613,7 +614,9 @@ function showConfirmationModal(d, qrDataURL) {
       <button id="cs-modal-done-btn" style="background:#38bdf8;color:#0f172a;border:none;padding:13px 32px;border-radius:12px;font-weight:700;font-size:0.95rem;cursor:pointer;width:100%;">Done</button>
     </div>`;
   document.body.appendChild(overlay);
-  document.getElementById('cs-modal-done-btn').addEventListener('click', () => overlay.remove());
+  document.getElementById('cs-modal-done-btn').addEventListener('click', () => {
+    window.location.href = 'dashboard.html';
+  });
 }
 
 // ─── HELPERS ────────────────────────────────────────────────────────────────────

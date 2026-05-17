@@ -137,7 +137,13 @@ const UIController = {
     },
     initButtons() {
         document.getElementById("btn-get-started")?.addEventListener("click", () => {
-            requireLoginOrRedirect('dashboard.html');
+            const user = getCurrentUser();
+            if (user) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            sessionStorage.setItem('civicsync_redirect', 'application.html');
+            window.location.href = 'login.html';
         });
 
         document.getElementById("btn-learn-more")?.addEventListener("click", () => {

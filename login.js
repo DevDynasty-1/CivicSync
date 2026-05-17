@@ -115,7 +115,9 @@ form.addEventListener('submit', async (e) => {
   showToast(`Welcome back, ${userName}!`, 'success');
 
   setTimeout(() => {
-    window.location.href = 'dashboard.html'; // Directs to dashboard on success
+    const redirect = sessionStorage.getItem('civicsync_redirect') || 'application.html';
+    sessionStorage.removeItem('civicsync_redirect');
+    window.location.href = redirect;
   }, 1200);
 });
 

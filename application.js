@@ -85,7 +85,7 @@ form.addEventListener('submit', (e) => {
 
   // Redirect after short delay so the user sees the toast
   setTimeout(() => {
-    window.location.href = 'booking.html';
+    window.location.href = 'upload.html';
   }, 1200);
 });
 
