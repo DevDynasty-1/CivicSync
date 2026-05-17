@@ -7,9 +7,9 @@
 // 3. Create an Email Template using the HTML in EMAIL_TEMPLATE_GUIDE below → copy Template ID
 // 4. Go to Account → API Keys → copy your Public Key
 // 5. Replace the three values below with yours
-const EMAILJS_PUBLIC_KEY  = 'S4pNjrFIhMHDLkLtQ';   // e.g. 'user_xxxxxxxxxxxx'
-const EMAILJS_SERVICE_ID  = 'service_0cj9vtz';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_l330ucs';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = '2B0_LXRZs2DaE_qNJ';   // e.g. 'user_xxxxxxxxxxxx'
+const EMAILJS_SERVICE_ID  = 'service_1c1z67a';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_5o42go2';  // e.g. 'template_xyz789'
 
 // EMAIL_TEMPLATE_GUIDE — paste this HTML into your EmailJS template body:
 // Template variables used: {{to_name}}, {{to_email}}, {{ref}}, {{office}},
