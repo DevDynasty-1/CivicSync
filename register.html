@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="register.css" />
@@ -31,7 +30,11 @@
         <section class="auth-right">
           <h2 class="form-title">Create an account</h2>
 
-          <form id="register-form" action="#" method="POST" class="auth-form">
+          <form
+            id="register-form"
+            class="auth-form"
+            onsubmit="event.preventDefault()"
+          >
             <div class="form-group">
               <label for="fullName" class="visually-hidden">Full Name</label>
               <input
@@ -98,6 +101,7 @@
         </section>
       </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="register.js"></script>
   </body>
 </html>
