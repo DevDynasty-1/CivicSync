@@ -8,12 +8,34 @@
     --text-muted: #cbd5e1;
 }
 
+/* PAGE TRANSITION ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: white;
     min-height: 100vh;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 .site-header {
@@ -37,6 +59,7 @@ body {
     max-width: 1100px;
     margin: 60px auto;
     padding: 0 20px;
+    animation: slideInUp 0.7s ease-out 0.1s backwards;
 }
 
 .page-headers { text-align: center; margin-bottom: 50px; }
@@ -67,7 +90,8 @@ body {
     border-radius: 10px;
     color: white;
     font-size: 1rem;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .form-group input:focus, 
@@ -86,7 +110,12 @@ body {
     font-weight: bold;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+}
+
+.btn-submit-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
 }
 
 /* CONTACT INFO CARDS */

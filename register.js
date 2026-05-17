@@ -190,10 +190,10 @@ form.addEventListener('submit', async (e) => {
     id:    idInput.value.trim(),
   }));
 
-  showToast('Account created! Redirecting to login...', 'success');
+  showToast('Account created! Redirecting to your application...', 'success');
 
   setTimeout(() => {
-    window.location.href = 'login.html';
+    window.location.href = 'application.html';
   }, 1400);
 });
 

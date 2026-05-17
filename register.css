@@ -7,6 +7,27 @@
     --text-muted: #cbd5e1;
 }
 
+/* PAGE TRANSITION ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -16,6 +37,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
 /* THE CARD BOX */
@@ -29,6 +51,7 @@ body {
     max-width: 900px;
     width: 90%;
     min-height: 550px; /* Slightly taller to fit the Google button */
+    animation: slideInUp 0.7s ease-out;
 }
 
 /* LEFT BRAND AREA */
@@ -77,6 +100,7 @@ body {
     border-radius: 10px;
     color: white;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .form-group input:focus {
@@ -92,7 +116,12 @@ body {
     border-radius: 10px;
     font-weight: 800;
     cursor: pointer;
-    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
 }
 
 /* THE "OR" DIVIDER */
