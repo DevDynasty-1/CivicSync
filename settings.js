@@ -7,6 +7,7 @@ const deleteBtn = document.querySelector('.btn-danger');
 const toggleSwitches = document.querySelectorAll('input[type="checkbox"]');
 const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
 const selectDropdowns = document.querySelectorAll('select');
+const infoBoxText = document.querySelector('.info-box-text');
 
 // Store original values
 const originalValues = {
@@ -15,8 +16,37 @@ const originalValues = {
   selects: {}
 };
 
-// Save original values on load
+// Load signed-in user data and populate form
 document.addEventListener('DOMContentLoaded', () => {
+  const userDataString = sessionStorage.getItem('civicsync_user');
+  
+  if (userDataString) {
+    try {
+      const userData = JSON.parse(userDataString);
+      // Populate form fields with user data
+      if (textInputs[0]) textInputs[0].value = userData.name || '';
+      if (textInputs[1]) textInputs[1].value = userData.email || '';
+      if (textInputs[2]) textInputs[2].value = userData.phone || '';
+      
+      // Update "Logged in as" info box
+      if (infoBoxText) {
+        infoBoxText.textContent = `${userData.name || 'User'} (${userData.email || 'No email'})`;
+      }
+    } catch (e) {
+      console.error('Error parsing user data:', e);
+    }
+  } else {
+    // No user signed in - clear fields and show empty state
+    if (infoBoxText) {
+      infoBoxText.textContent = 'Not logged in';
+    }
+    // Clear all text inputs
+    textInputs.forEach(input => {
+      input.value = '';
+    });
+  }
+  
+  // Save original values on load
   textInputs.forEach((input, index) => {
     originalValues.inputs[index] = input.value;
   });
