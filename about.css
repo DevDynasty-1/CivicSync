@@ -131,7 +131,7 @@ body {
     margin: 0;
 }
 
-..about-intro-text {
+.about-intro-text {
     max-width: 740px;
     margin: 0 auto 48px;
     font-size: 1.05rem;

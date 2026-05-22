@@ -163,25 +163,38 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled     = true;
   submitBtn.innerHTML    = '<span class="btn-spinner"></span> Creating account...';
 
-  // Create user in Supabase
-  const { data, error } = await supabase.auth.signUp({
-      email: emailInput.value.trim(),
-      password: pwInput.value,
-      options: {
-          data: { 
-              role: 'user', 
-              full_name: nameInput.value.trim(),
-              id_number: idInput.value.trim()
-          }
-      }
-  });
+// --- NEW: Send data to our Node.js Backend ---
+  try {
+      const response = await fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              email: emailInput.value.trim(),
+              password: pwInput.value,
+              fullName: nameInput.value.trim(),
+              idNumber: idInput.value.trim()
+          })
+      });
 
-  if (error) {
+      const result = await response.json();
+
+      if (!response.ok) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Account';
+          showToast(result.error || "Registration failed", 'error');
+          return;
+      }
+      
+  } catch (err) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Create Account';
-      showToast(error.message, 'error');
+      showToast("Cannot connect to the server.", 'error');
+      console.error(err);
       return;
   }
+  // --- END NEW CODE ---
 
   // Save minimal session data for the dashboard
   sessionStorage.setItem('civicsync_user', JSON.stringify({
