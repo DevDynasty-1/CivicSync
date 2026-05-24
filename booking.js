@@ -1,24 +1,4 @@
-// booking.js — CivicSync Booking System with Home Affairs Map + Email Confirmation
 
-// ─── EMAILJS CONFIGURATION ──────────────────────────────────────────────────────
-// SETUP INSTRUCTIONS:
-// 1. Go to https://www.emailjs.com and create a free account
-// 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
-// 3. Create an Email Template using the HTML in EMAIL_TEMPLATE_GUIDE below → copy Template ID
-// 4. Go to Account → API Keys → copy your Public Key
-// 5. Replace the three values below with yours
-const EMAILJS_PUBLIC_KEY  = 'S4pNjrFIhMHDLkLtQ';   // e.g. 'user_xxxxxxxxxxxx'
-const EMAILJS_SERVICE_ID  = 'service_0cj9vtz';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_l330ucs';  // e.g. 'template_xyz789'
-
-// EMAIL_TEMPLATE_GUIDE — paste this HTML into your EmailJS template body:
-// Template variables used: {{to_name}}, {{to_email}}, {{ref}}, {{office}},
-// {{address}}, {{date}}, {{time}}, {{booked_at}}, {{qr_image}}
-// Subject line: "CivicSync Booking Confirmed – {{ref}}"
-
-emailjs.init(EMAILJS_PUBLIC_KEY);
-
-// ─── HOME AFFAIRS OFFICES (South Africa) ──────────────────────────────────────
 const HOME_AFFAIRS_OFFICES = [
   // Gauteng
   { id: 'sandton',        name: 'Sandton Home Affairs',                 address: 'Sandton City, Cnr Rivonia Rd & 5th St, Sandton',            lat: -26.1076, lng: 28.0567, province: 'Gauteng' },
@@ -55,7 +35,6 @@ const HOME_AFFAIRS_OFFICES = [
   { id: 'kimberley',   name: 'Kimberley Home Affairs',                  address: 'Du Toitspan Rd, Kimberley',                                 lat: -28.7282, lng: 24.7499, province: 'Northern Cape' },
 ];
 
-// ─── STATE ─────────────────────────────────────────────────────────────────────
 let userLat = null;
 let userLng = null;
 let selectedOffice = null;
@@ -74,7 +53,6 @@ let currentMonth = new Date().getMonth();
 let selectedDate = null;
 let selectedTime = null;
 
-// ─── DISTANCE CALCULATION ───────────────────────────────────────────────────────
 function haversineKm(lat1, lng1, lat2, lng2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -98,7 +76,6 @@ function getOfficesWithDistance() {
   });
 }
 
-// ─── MAP INITIALIZATION ─────────────────────────────────────────────────────────
 function initMap() {
   map = L.map('ha-map', { zoomControl: true }).setView([-28.5, 25.5], 5);
 
@@ -135,7 +112,6 @@ function initMap() {
   renderOfficeList();
 }
 
-// ─── OFFICE LIST (SIDEBAR) ─────────────────────────────────────────────────────
 function renderOfficeList() {
   const offices = getOfficesWithDistance();
   const query = document.getElementById('office-search').value.toLowerCase();
@@ -181,7 +157,6 @@ function renderOfficeList() {
   });
 }
 
-// ─── SELECT OFFICE ──────────────────────────────────────────────────────────────
 function selectOfficeFromMap(office) {
   selectedOffice = office;
   showSelectedOfficeCard(office);
@@ -212,7 +187,6 @@ function showSelectedOfficeCard(office) {
   }
 }
 
-// ─── GEOLOCATION ───────────────────────────────────────────────────────────────
 document.getElementById('btn-locate-me').addEventListener('click', () => {
   const btn = document.getElementById('btn-locate-me');
   btn.textContent = 'Locating...';
@@ -262,10 +236,8 @@ document.getElementById('btn-locate-me').addEventListener('click', () => {
   );
 });
 
-// ─── SEARCH ─────────────────────────────────────────────────────────────────────
 document.getElementById('office-search').addEventListener('input', renderOfficeList);
 
-// ─── SELECT OFFICE BUTTON ───────────────────────────────────────────────────────
 document.getElementById('btn-select-office').addEventListener('click', () => {
   if (!selectedOffice) return;
 
@@ -280,7 +252,6 @@ document.getElementById('btn-select-office').addEventListener('click', () => {
   buildTimeSlots(null);
 });
 
-// ─── DIRECTIONS ─────────────────────────────────────────────────────────────────
 document.getElementById('btn-get-directions').addEventListener('click', () => {
   if (!selectedOffice) return;
   openDirectionsModal(selectedOffice);
@@ -326,7 +297,6 @@ document.getElementById('directions-modal').addEventListener('click', (e) => {
   }
 });
 
-// ─── CALENDAR ───────────────────────────────────────────────────────────────────
 function buildCalendar(year, month) {
   const monthYearEl  = document.querySelector('.calendar-month-year');
   const datesGridEl  = document.querySelector('.calendar-dates-grid');
@@ -437,7 +407,6 @@ function updateConfirmState() {
 document.getElementById('booking-name').addEventListener('input', updateConfirmState);
 document.getElementById('booking-email').addEventListener('input', updateConfirmState);
 
-// ─── FORM SUBMISSION ────────────────────────────────────────────────────────────
 document.getElementById('booking-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -469,7 +438,6 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
 
   sessionStorage.setItem('civicsync_booking', JSON.stringify(bookingDetails));
 
-  // Disable button while processing
   const btn = document.getElementById('btn-confirm-booking');
   btn.disabled = true;
   btn.textContent = 'Sending confirmation…';
@@ -485,7 +453,6 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
   });
 });
 
-// ─── QR CODE GENERATION ─────────────────────────────────────────────────────────
 function generateQRDataURL(d) {
   return new Promise((resolve, reject) => {
     const qrPayload = [
@@ -527,33 +494,36 @@ function generateQRDataURL(d) {
   });
 }
 
-// ─── SEND EMAIL VIA EMAILJS ──────────────────────────────────────────────────────
 async function sendConfirmationEmail(d, qrDataURL) {
-  if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
-    console.warn('EmailJS not configured — skipping email send.');
-    return;
-  }
-  try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      to_name:    d.name,
-      to_email:   d.email,
-      ref:        d.ref,
-      office:     d.office,
-      address:    d.address,
-      date:       d.date,
-      time:       d.time,
-      booked_at:  d.bookedAt,
-      qr_image:   qrDataURL || '',
-      maps_link:  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.address)}`,
-    });
-    showToast(`✓ Confirmation email sent to ${d.email}`, 'success');
-  } catch (err) {
-    console.error('EmailJS error:', err);
-    showToast('Booking saved! Email delivery failed — check your EmailJS configuration.', 'error');
-  }
+    try {
+        const response = await fetch('/api/send-confirmation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userEmail:    d.email,
+                userName:     d.name,
+                bookingRef:   d.ref,
+                office:       d.office,
+                address:      d.address,
+                date:         d.date,
+                time:         d.time,
+                bookedAt:     d.bookedAt,
+                mapsLink:     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.address)}`,
+                qrCodeBase64: qrDataURL || '',
+            })
+        });
+
+        if (response.ok) {
+            showToast(`✓ Confirmation email sent to ${d.email}`, 'success');
+        } else {
+            showToast('Email delivery failed — check your server.', 'error');
+        }
+    } catch (err) {
+        console.error('Email error:', err);
+        showToast('Could not reach the server to send email.', 'error');
+    }
 }
 
-// ─── CONFIRMATION MODAL ─────────────────────────────────────────────────────────
 function showConfirmationModal(d, qrDataURL) {
   const distLine = d.distKm !== null
     ? `<tr><td style="color:#94a3b8;padding:7px 0 7px;width:38%;">Distance</td><td style="font-weight:600;">${formatDistance(d.distKm)}</td></tr>`
@@ -616,7 +586,6 @@ function showConfirmationModal(d, qrDataURL) {
   document.getElementById('cs-modal-done-btn').addEventListener('click', () => overlay.remove());
 }
 
-// ─── HELPERS ────────────────────────────────────────────────────────────────────
 function generateRef() {
   return 'CS-' + Math.random().toString(36).substring(2, 7).toUpperCase();
 }
@@ -639,5 +608,4 @@ function showToast(message, type = 'success') {
   setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 4000);
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────────
 initMap();

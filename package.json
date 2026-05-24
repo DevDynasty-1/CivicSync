@@ -1,0 +1,28 @@
+{
+  "name": "civicsync",
+  "version": "1.0.0",
+  "description": "",
+ "main": "server.js",
+  "scripts": {
+  "start": "node server.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevDynasty-1/CivicSync.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DevDynasty-1/CivicSync/issues"
+  },
+  "homepage": "https://github.com/DevDynasty-1/CivicSync#readme",
+  "dependencies": {
+    "@emailjs/nodejs": "^5.0.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
