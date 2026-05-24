@@ -52,6 +52,24 @@ const MessageService = {
     }
 };
 
+function getCurrentUser() {
+    try {
+        return JSON.parse(sessionStorage.getItem('civicsync_user')) || null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function requireLoginOrRedirect(targetPage) {
+    const user = getCurrentUser();
+    if (user) {
+        window.location.href = targetPage;
+        return;
+    }
+    sessionStorage.setItem('civicsync_redirect', targetPage);
+    window.location.href = 'login.html';
+}
+
 function Component(selector, renderFn) {
     return {
         el: document.querySelector(selector),
@@ -119,29 +137,28 @@ const UIController = {
     },
     initButtons() {
         document.getElementById("btn-get-started")?.addEventListener("click", () => {
-            window.location.href = "booking.html";
+            const user = getCurrentUser();
+            if (user) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            sessionStorage.setItem('civicsync_redirect', 'application.html');
+            window.location.href = 'login.html';
         });
+
         document.getElementById("btn-learn-more")?.addEventListener("click", () => {
             window.location.href = "about.html";
         });
-        
-        const uploadCard = document.querySelector('.step-card:nth-child(1)');
-        if (uploadCard) {
-            uploadCard.style.cursor = 'pointer';
-            uploadCard.addEventListener('click', (e) => {
+
+        const stepCards = document.querySelectorAll('.step-card');
+        stepCards.forEach((card, index) => {
+            const target = index === 0 ? 'upload.html' : index === 1 ? 'booking.html' : 'verification.html';
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
                 e.stopPropagation();
-                window.location.href = "upload.html";
+                requireLoginOrRedirect(target);
             });
-        }
-        
-        const bookCard = document.querySelector('.step-card:nth-child(2)');
-        if (bookCard) {
-            bookCard.style.cursor = 'pointer';
-            bookCard.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.location.href = "booking.html";
-            });
-        }
+        });
     },
     initAnimations() {
         const observer = new IntersectionObserver(entries => {

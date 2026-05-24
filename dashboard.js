@@ -5,7 +5,22 @@ if (greetingEl) {
     let greeting = "Good Morning";
     if (hour >= 12 && hour < 18) greeting = "Good Afternoon";
     if (hour >= 18) greeting = "Good Evening";
-    greetingEl.textContent = `${greeting}, Thabo`;
+
+    // 1. Grab the saved user data from the browser memory
+    const userDataString = sessionStorage.getItem('civicsync_user');
+    let userName = 'User'; // Fallback name just in case
+
+    // 2. If we found data, extract the name
+    if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        // Split the full name by spaces and grab the first part (First Name)
+        if (userData.name) {
+            userName = userData.name.split(' ')[0]; 
+        }
+    }
+
+    // 3. Update the screen
+    greetingEl.textContent = `${greeting}, ${userName}`;
 }
 
 const fixBtn = document.querySelector(".btn-alert-action");

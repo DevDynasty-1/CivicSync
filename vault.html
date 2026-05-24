@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Document Vault</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+      .vault-container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .vault-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .search-box {
+        flex: 1;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        margin-right: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .search-box:focus {
+        outline: none;
+        border-color: #38bdf8;
+        background: rgba(56, 189, 248, 0.05);
+      }
+
+      .filter-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #38bdf8;
+        color: #0f172a;
+        border-color: #38bdf8;
+      }
+
+      .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .document-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .document-card:hover {
+        background: rgba(56, 189, 248, 0.08);
+        border-color: #38bdf8;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+      }
+
+      .doc-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .doc-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: white;
+      }
+
+      .doc-date {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .doc-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .status-verified {
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+      }
+
+      .status-pending {
+        background: rgba(251, 191, 36, 0.2);
+        color: #fbbf24;
+      }
+
+      .status-rejected {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+      }
+
+      .doc-actions {
+        display: flex;
+        gap: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 15px;
+        margin-top: 15px;
+      }
+
+      .action-btn {
+        flex: 1;
+        padding: 8px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #38bdf8;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .action-btn:hover {
+        background: rgba(56, 189, 248, 0.1);
+        border-color: #38bdf8;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #cbd5e1;
+      }
+
+      .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .empty-text {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .empty-subtext {
+        color: #64748b;
+        margin-bottom: 30px;
+      }
+
+      .btn-upload {
+        background: #38bdf8;
+        color: #0f172a;
+        padding: 10px 25px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-upload:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+      }
+    </style>
+  </head>
+  <body class="dashboard-bg-image">
+    <header class="site-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-primary">Get Started</a>
+      </div>
+    </header>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Menu</h2>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="triage.html">Triage Wizard</a></li>
+            <li><a href="vault.html" class="active">Document vault</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="settings.html">Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-content">
+        <header class="dashboard-header">
+          <h1 class="greeting">Document Vault</h1>
+          <p class="greeting-subtitle">
+            Securely store and manage all your important documents in one place.
+          </p>
+        </header>
+
+        <div class="vault-container">
+          <div class="vault-toolbar">
+            <input 
+              type="text" 
+              class="search-box" 
+              placeholder="Search documents..."
+            />
+            <div class="filter-buttons">
+              <button class="filter-btn active">All</button>
+              <button class="filter-btn">Verified</button>
+              <button class="filter-btn">Pending</button>
+              <button class="filter-btn">Rejected</button>
+            </div>
+          </div>
+
+          <div class="documents-grid">
+            <div class="document-card">
+              <div class="doc-icon">📄</div>
+              <div class="doc-name">SA ID Book</div>
+              <div class="doc-date">Uploaded: May 10, 2026</div>
+              <div class="doc-status status-verified">Verified</div>
+              <div class="doc-actions">
+                <button class="action-btn">View</button>
+                <button class="action-btn">Download</button>
+              </div>
+            </div>
+
+            <div class="document-card">
+              <div class="doc-icon">📋</div>
+              <div class="doc-name">Birth Certificate</div>
+              <div class="doc-date">Uploaded: May 8, 2026</div>
+              <div class="doc-status status-rejected">Rejected</div>
+              <div class="doc-actions">
+                <button class="action-btn">View</button>
+                <button class="action-btn">Reupload</button>
+              </div>
+            </div>
+
+            <div class="document-card">
+              <div class="doc-icon">🏠</div>
+              <div class="doc-name">Proof of Address</div>
+              <div class="doc-date">Uploaded: May 15, 2026</div>
+              <div class="doc-status status-pending">Pending Review</div>
+              <div class="doc-actions">
+                <button class="action-btn">View</button>
+                <button class="action-btn">Edit</button>
+              </div>
+            </div>
+
+            <div class="document-card">
+              <div class="doc-icon">📸</div>
+              <div class="doc-name">Passport Photo</div>
+              <div class="doc-date">Not uploaded</div>
+              <div class="doc-status status-pending">Upload Required</div>
+              <div class="doc-actions">
+                <button class="action-btn">Upload</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="vault.js"></script>
+      <script src="profile-menu.js"></script>
+</body>
+</html>
+
+

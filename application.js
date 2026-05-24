@@ -1,6 +1,8 @@
 // application.js — CivicSync Triage Wizard
 
 // Document checklist per application type
+//still need to add API for document verification
+
 const checklists = {
   'first-id': [
     'Original birth certificate (unabridged)',
@@ -83,7 +85,7 @@ form.addEventListener('submit', (e) => {
 
   // Redirect after short delay so the user sees the toast
   setTimeout(() => {
-    window.location.href = 'booking.html';
+    window.location.href = 'upload.html';
   }, 1200);
 });
 

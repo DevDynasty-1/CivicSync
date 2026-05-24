@@ -112,6 +112,55 @@
       </td>
     </tr>
   </table>
+    <script src="profile-menu.js"></script>
 </body>
 </html>
 
+<<<<<<< HEAD
+=======
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     EMAILJS SETUP GUIDE
+     ═══════════════════════════════════════════════════════════════════════════
+
+  1. Create a free account at https://www.emailjs.com
+     (Free tier: 200 emails/month — plenty for testing)
+
+  2. Add a Service:
+     Dashboard → Email Services → Add New Service
+     Choose Gmail / Outlook / Yahoo / etc.
+     Copy the SERVICE ID (e.g. "service_abc123")
+
+  3. Create a Template:
+     Dashboard → Email Templates → Create New Template
+     - Subject:  CivicSync Booking Confirmed – {{ref}}
+     - Body:     Paste the HTML above (everything before this comment block)
+     - To Email: {{to_email}}
+     - To Name:  {{to_name}}
+     Copy the TEMPLATE ID (e.g. "template_xyz789")
+
+  4. Get your Public Key:
+     Dashboard → Account → General → Public Key
+     Copy it (e.g. "user_xxxxxxxxxx")
+
+  5. Open booking.js and replace the three values at the top:
+     const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+     const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+     const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+  That's it — emails will now send automatically on booking confirmation!
+
+  TEMPLATE VARIABLES REFERENCE:
+  {{to_name}}   — Booker's full name
+  {{to_email}}  — Recipient email address
+  {{ref}}       — Booking reference (e.g. CS-XK9B2)
+  {{office}}    — Home Affairs office name
+  {{address}}   — Office street address
+  {{date}}      — Appointment date (e.g. 24 May 2026)
+  {{time}}      — Appointment time (e.g. 10:00 AM)
+  {{booked_at}} — When the booking was made
+  {{qr_image}}  — QR code as a base64 PNG data URL
+  {{maps_link}} — Google Maps link to the office
+═══════════════════════════════════════════════════════════════════════════ -->
+
+
+>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156

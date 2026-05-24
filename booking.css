@@ -357,6 +357,7 @@ input[type="radio"]:checked + .time-slot-label {
   background: var(--primary-blue); color: var(--dark-bg); font-weight: 700; border-color: var(--primary-blue);
 }
 
+/* CONFIRM BUTTON - Enhanced */
 .btn-confirm {
   width: 100%; padding: 15px;
   background: var(--primary-blue); color: var(--dark-bg);

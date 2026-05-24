@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicSync - Settings</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+      .settings-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .settings-section {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 25px;
+      }
+
+      .settings-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .settings-icon {
+        font-size: 1.5rem;
+      }
+
+      .divider {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 25px 0;
+      }
+
+      .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .setting-item:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .setting-label {
+        flex: 1;
+      }
+
+      .setting-label-text {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .setting-description {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 28px;
+        cursor: pointer;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        border-radius: 28px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 2px;
+        background-color: white;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #38bdf8;
+        border-color: #38bdf8;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(22px);
+      }
+
+      .select-dropdown {
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .select-dropdown:focus {
+        outline: none;
+        border-color: #38bdf8;
+        background: rgba(56, 189, 248, 0.05);
+      }
+
+      .select-dropdown option {
+        background: #1e293b;
+        color: white;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .btn-save {
+        flex: 1;
+        padding: 12px 20px;
+        background: #38bdf8;
+        color: #0f172a;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+      }
+
+      .btn-cancel {
+        flex: 1;
+        padding: 12px 20px;
+        background: transparent;
+        color: #38bdf8;
+        border: 2px solid #38bdf8;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .btn-cancel:hover {
+        background: rgba(56, 189, 248, 0.1);
+      }
+
+      .danger-zone {
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.05);
+      }
+
+      .danger-zone .settings-title {
+        color: #ef4444;
+      }
+
+      .btn-danger {
+        background: transparent;
+        color: #ef4444;
+        border: 2px solid #ef4444;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-danger:hover {
+        background: rgba(239, 68, 68, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .info-box {
+        background: rgba(56, 189, 248, 0.1);
+        border-left: 4px solid #38bdf8;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .info-box-title {
+        color: #38bdf8;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .info-box-text {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body class="dashboard-bg-image">
+    <header class="site-header">
+      <div class="logo-container">
+        <img
+          src="assets/civicsync-logo.svg"
+          alt="CivicSync Logo"
+          class="logo-icon"
+        />
+        <span class="logo-text">CivicSync</span>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-action">
+        <a href="register.html" class="btn-primary">Get Started</a>
+      </div>
+    </header>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Menu</h2>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="triage.html">Triage Wizard</a></li>
+            <li><a href="vault.html">Document vault</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="settings.html" class="active">Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="dashboard-content">
+        <header class="dashboard-header">
+          <h1 class="greeting">Settings</h1>
+          <p class="greeting-subtitle">
+            Manage your account preferences and security settings.
+          </p>
+        </header>
+
+        <div class="settings-container">
+          <!-- Account Settings -->
+          <div class="settings-section">
+            <h2 class="settings-title">
+              <span class="settings-icon">👤</span>
+              Account Settings
+            </h2>
+            
+            <div class="info-box">
+              <div class="info-box-title">Logged in as</div>
+              <div class="info-box-text">Not logged in</div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Display Name</div>
+                <div class="setting-description">How your name appears in CivicSync</div>
+              </div>
+              <input type="text" class="select-dropdown" value="" placeholder="Enter your name" />
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Email Address</div>
+                <div class="setting-description">Your primary contact email</div>
+              </div>
+              <input type="email" class="select-dropdown" value="" placeholder="Enter your email" />
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Phone Number</div>
+                <div class="setting-description">For appointment confirmations</div>
+              </div>
+              <input type="tel" class="select-dropdown" value="" placeholder="Enter your phone number" />
+            </div>
+          </div>
+
+          <!-- Privacy & Security -->
+          <div class="settings-section">
+            <h2 class="settings-title">
+              <span class="settings-icon">🔒</span>
+              Privacy & Security
+            </h2>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Two-Factor Authentication</div>
+                <div class="setting-description">Add extra security to your account</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Email Notifications</div>
+                <div class="setting-description">Receive updates about your applications</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">SMS Notifications</div>
+                <div class="setting-description">Get alerts via text message</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Change Password</div>
+                <div class="setting-description">Update your login password</div>
+              </div>
+              <button class="btn-danger" style="border: none; background: rgba(56, 189, 248, 0.1); color: #38bdf8;">
+                Update
+              </button>
+            </div>
+          </div>
+
+          <!-- Preferences -->
+          <div class="settings-section">
+            <h2 class="settings-title">
+              <span class="settings-icon">⚙️</span>
+              Preferences
+            </h2>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Language</div>
+                <div class="setting-description">Choose your preferred language</div>
+              </div>
+              <select class="select-dropdown">
+                <option>English</option>
+                <option>Afrikaans</option>
+                <option>Zulu</option>
+                <option>Xhosa</option>
+              </select>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-label">
+                <div class="setting-label-text">Theme</div>
+                <div class="setting-description">Select your preferred theme</div>
+              </div>
+              <select class="select-dropdown">
+                <option>Dark (Current)</option>
+                <option>Light</option>
+                <option>Auto</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="settings-section danger-zone">
+            <h2 class="settings-title">
+              <span class="settings-icon">⚠️</span>
+              Danger Zone
+            </h2>
+            <p style="color: #cbd5e1; margin-bottom: 20px;">
+              These actions cannot be undone. Please proceed with caution.
+            </p>
+            <button class="btn-danger">Delete Account</button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="button-group">
+            <button class="btn-save">Save Changes</button>
+            <button class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="settings.js"></script>
+      <script src="profile-menu.js"></script>
+</body>
+</html>
+
+

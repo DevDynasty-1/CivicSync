@@ -1,3 +1,6 @@
+var supabaseUrl = 'https://aislfdgqbwtvgilkxavw.supabase.co';
+var supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpc2xmZGdxYnd0dmdpbGt4YXZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMjkzNzYsImV4cCI6MjA5NDYwNTM3Nn0.trBKClg6Yrvcp6xKlwxLIpsxWiLAky7Gpe1PoQg4F6U';
+var supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 // login.js — CivicSync Login Page
 
 const form      = document.getElementById('login-form');
@@ -82,10 +85,13 @@ form.addEventListener('submit', async (e) => {
   loginBtn.disabled   = true;
   loginBtn.innerHTML  = '<span class="btn-spinner"></span> Signing in...';
 
-  // Simulate API call — replace with real fetch to your backend / Firebase
-  const result = await fakeLogin(emailInput.value.trim(), pwInput.value);
+  // REAL SUPABASE API CALL
+  const { data, error } = await supabase.auth.signInWithPassword({
+      email: emailInput.value.trim(),
+      password: pwInput.value,
+  });
 
-  if (!result.success) {
+  if (error) {
     loginBtn.disabled  = false;
     loginBtn.textContent = 'Log In';
 
@@ -95,40 +101,27 @@ form.addEventListener('submit', async (e) => {
       input.classList.add('invalid');
     });
     emailError.textContent = '';
-    pwError.textContent    = 'Incorrect email or password. Please try again.';
+    pwError.textContent    = error.message; // Shows actual Supabase error
 
     showToast('Login failed. Check your credentials.', 'error');
     return;
   }
 
-  // Persist session
-  sessionStorage.setItem('civicsync_user', JSON.stringify(result.user));
-  showToast(`Welcome back, ${result.user.name}!`, 'success');
+  // Check role and persist session
+  const userRole = data.user.user_metadata.role;
+  const userName = data.user.user_metadata.full_name || 'User';
+  
+  sessionStorage.setItem('civicsync_user', JSON.stringify({ name: userName, role: userRole }));
+  showToast(`Welcome back, ${userName}!`, 'success');
 
   setTimeout(() => {
-    // Redirect to dashboard or wherever the user was going
     const redirect = sessionStorage.getItem('civicsync_redirect') || 'application.html';
     sessionStorage.removeItem('civicsync_redirect');
     window.location.href = redirect;
   }, 1200);
 });
 
-// --- FAKE LOGIN (replace with real API call) ---
-// To connect to backend: replace this with fetch('/api/login', { method:'POST', body: JSON.stringify({email, password}) })
-async function fakeLogin(email, password) {
-  await new Promise(resolve => setTimeout(resolve, 1400));
 
-  // Demo: any valid-format email + password >= 6 chars succeeds
-  // Remove this and use your real backend endpoint
-  const name = email.split('@')[0].replace(/[._]/g, ' ');
-  return {
-    success: true,
-    user: {
-      name:  name.charAt(0).toUpperCase() + name.slice(1),
-      email: email,
-    }
-  };
-}
 
 // --- TOAST ---
 function showToast(message, type = 'success') {
