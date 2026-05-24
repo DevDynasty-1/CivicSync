@@ -1,4 +1,14 @@
 {
+<<<<<<< HEAD
+  "name": "civicsync",
+  "version": "1.0.0",
+  "description": "",
+ "main": "server.js",
+  "scripts": {
+  "start": "node server.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+=======
   "name": "devdynasty-group-project",
   "version": "1.0.0",
   "description": "",
@@ -7,6 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DevDynasty-1/CivicSync.git"
@@ -20,7 +31,11 @@
   },
   "homepage": "https://github.com/DevDynasty-1/CivicSync#readme",
   "dependencies": {
+<<<<<<< HEAD
+    "@emailjs/nodejs": "^5.0.2",
+=======
     "@supabase/supabase-js": "^2.106.1",
+>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1"
