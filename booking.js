@@ -610,7 +610,7 @@ function showConfirmationModal(d, qrDataURL) {
     window.location.href = 'dashboard.html';
   });
 }
-
+//fixed
 function generateRef() {
   return 'CS-' + Math.random().toString(36).substring(2, 7).toUpperCase();
 }
