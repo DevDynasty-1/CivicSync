@@ -10,6 +10,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navLinks.classList.toggle("active");
+});
+
 // --- ACTIVE NAV LINK HIGHLIGHT ---
 // Marks the current page link as active based on the filename
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';

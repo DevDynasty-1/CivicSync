@@ -167,7 +167,7 @@ const UIController = {
             });
         }, { threshold: 0.2 });
         document.querySelectorAll("section, .step-card").forEach(el => {
-            el.classList.add("hidden");
+            el.classList.add("anim-hidden");
             observer.observe(el);
         });
     }

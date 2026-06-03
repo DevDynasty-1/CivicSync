@@ -50,6 +50,79 @@ body {
   transition: all 0.2s;
 }
 .btn-outline:hover { background: var(--primary-blue); color: var(--dark-bg); }
+/* ------------------------------ */
+/* HAMBURGER MENU (MATCH ABOUT)   */
+/* ------------------------------ */
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: 0.3s ease-in-out;
+    background-color: white;
+}
+
+/* ------------------------------ */
+/* MOBILE NAVIGATION (MATCH ABOUT)*/
+/* ------------------------------ */
+
+@media(max-width: 768px){
+
+    /* Show hamburger */
+    .hamburger {
+        display: block;
+    }
+
+    /* Hamburger animation */
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile nav menu */
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #1e293b;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 20px 0;
+        gap: 0;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 16px 0;
+    }
+
+    /* Header spacing fix */
+    .site-header {
+        padding: 20px 20px;
+    }
+
+    /* Hide Get Started button on mobile */
+    .header-action {
+        display: none;
+    }
+}
+
 
 /* ─── PAGE HEADER ────────────────────────────────────────────────────────────── */
 .booking-main-content {
@@ -61,7 +134,67 @@ body {
 .page-title { font-size: 2.4rem; font-weight: 800; margin: 0 0 12px; }
 .page-subtitle { color: var(--text-muted); margin: 0; font-size: 1.05rem; }
 
-/* ─── STEP BADGE ─────────────────────────────────────────────────────────────── */
+/*Na*/
+@media(max-width: 600px){
+
+    /* Page title smaller */
+    .page-title{
+        font-size: 2rem;
+    }
+
+    /* Dropdown text smaller */
+    .location-dropdown{
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    /* Calendar header text */
+    .calendar-month-year{
+        font-size: 1.2rem;
+    }
+
+    /* Time slot labels */
+    .time-slot-label{
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+/* Confirm button */
+    .btn-confirm{
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
+
+@media(max-width: 450px){
+
+    /* Even smaller title */
+    .page-title{
+        font-size: 1.7rem;
+    }
+
+    /* Calendar padding */
+    .calendar-widget{
+        padding: 15px;
+    }
+
+    /* Dates smaller */
+    .date{
+        padding: 10px 0;
+        font-size: 0.9rem;
+    }
+    /* Time slot labels */
+    .time-slot-label{
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Confirm button */
+    .btn-confirm{
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+/* ─── STEP BADGE ───────────────────────────────────────────────────────── */
 .step-badge {
   display: inline-block;
   background: var(--primary-blue);
@@ -479,4 +612,21 @@ input[type="radio"]:checked + .time-slot-label {
   .office-card-actions { width: 100%; }
   .btn-directions, .btn-select-office { flex: 1; justify-content: center; }
   .page-title { font-size: 1.8rem; }
+}
+
+/* Increase calendar touch targets for easier selection on small devices */
+@media (max-width: 768px) {
+  .calendar-widget { padding: 22px; }
+  .calendar-days-header { font-size: 0.95rem; gap: 4px; }
+  .calendar-dates-grid { gap: 10px; }
+  .date { padding: 14px 0; min-height: 44px; font-size: 1rem; }
+  .btn-cal-nav { width: 40px; height: 40px; font-size: 1.1rem; border-radius: 10px; }
+}
+
+@media (max-width: 450px) {
+  .calendar-widget { padding: 18px; }
+  .calendar-days-header { font-size: 0.98rem; }
+  .calendar-dates-grid { gap: 8px; }
+  .date { padding: 16px 0; min-height: 48px; font-size: 1.02rem; }
+  .btn-cal-nav { width: 44px; height: 44px; font-size: 1.2rem; }
 }

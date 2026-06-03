@@ -1,0 +1,86 @@
+/* Shared responsive utilities for all pages */
+:root{
+  --max-width:1200px;
+  --gap:16px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+
+/* Layout container */
+.container{width:100%;max-width:var(--max-width);margin:0 auto;padding:0 var(--gap)}
+
+/* Images and media */
+img,video,iframe{max-width:100%;height:auto;display:block}
+
+/* Make forms and inputs full width on small screens */
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;max-width:100%;padding:10px;border:1px solid #ddd;border-radius:6px}
+button{cursor:pointer}
+
+/* Responsive header/nav adjustments */
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.main-nav{display:block}
+.nav-links{display:flex;gap:12px;list-style:none;padding:0;margin:0}
+.nav-links a{display:inline-block}
+.hamburger{display:none;cursor:pointer}
+.bar{display:block;width:25px;height:3px;margin:5px auto;transition:0.3s ease-in-out;background-color:#fff}
+.header-action{display:flex;align-items:center}
+.btn-outline{border:2px solid var(--civic-blue);color:var(--civic-blue);padding:8px 20px;border-radius:50px;text-decoration:none;font-weight:600;transition:all 0.2s}
+.btn-outline:hover{background:var(--civic-blue);color:var(--dark-bg)}
+
+/* Utility helpers */
+.hidden{display:none}
+.anim-hidden{opacity:0;transform:translateY(24px);visibility:hidden;transition:opacity 0.4s ease,transform 0.4s ease,visibility 0.4s ease}
+.show{opacity:1;transform:none;visibility:visible}
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+
+/* Small screens (phones) */
+@media (max-width:599px){
+  .nav-links{flex-direction:column;gap:12px}
+  .nav-links a{padding:10px 8px;display:block}
+  .hamburger{display:block}
+  .hero-content,.auth-card,.booking-main-content,.container{padding:12px}
+  .cards-container{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .step-card{margin-bottom:0;padding:12px}
+  .booking-grid{display:block}
+  .calendar-widget{margin-bottom:16px}
+}
+
+/* Auth pages: stack and reduce padding on small screens */
+@media (max-width:600px){
+  .auth-card{flex-direction:column;min-height:auto;padding:0;overflow:visible;width:94%;max-width:720px}
+  .auth-left,.auth-right{padding:20px}
+  .auth-heading{font-size:1.6rem}
+  .logo-text{font-size:1.2rem}
+}
+
+/* Hero and landing adjustments */
+@media (max-width:768px){
+  .step-card{font-size:0.95rem}
+}
+
+/* Footer stacking */
+@media (max-width:768px){
+  .site-footer{flex-direction:column;align-items:flex-start;gap:16px;padding:24px}
+  .footer-right{align-self:stretch}
+}
+
+/* Ensure logo scales */
+.logo-icon{max-height:48px;height:auto}
+
+
+/* Medium screens (tablets) */
+@media (min-width:600px) and (max-width:1023px){
+  .nav-links{gap:10px}
+  .cards-container{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .booking-grid{display:grid;grid-template-columns:1fr 320px;gap:12px}
+}
+
+/* Large screens */
+@media (min-width:1024px){
+  .cards-container{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .booking-grid{display:grid;grid-template-columns:1fr 380px;gap:20px}
+}
+
+/* Small tweaks for accessibility */
+button:focus, input:focus, select:focus, textarea:focus{outline:3px solid rgba(21,156,228,0.25);outline-offset:2px}

@@ -7,8 +7,18 @@
 // 4. Go to Account → API Keys → copy your Public Key
 // 5. Replace the three values below with yours
 
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navLinks.classList.toggle("active");
+});
+
+
 // ─── HOME AFFAIRS OFFICES (South Africa) ──────────────────────────────────────
 //>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
+
 const HOME_AFFAIRS_OFFICES = [
   // Gauteng
   { id: 'sandton',        name: 'Sandton Home Affairs',                 address: 'Sandton City, Cnr Rivonia Rd & 5th St, Sandton',            lat: -26.1076, lng: 28.0567, province: 'Gauteng' },
