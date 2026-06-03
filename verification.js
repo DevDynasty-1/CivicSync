@@ -55,31 +55,6 @@ if (proceedBtn) {
   proceedBtn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
 }
 
-// --- INJECT STATUS ICON SVGs (since HTML uses placeholder spans) ---
-const iconMap = {
-  'icon-fingerprint': `<svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="16" r="14" stroke="#38bdf8" stroke-width="1.5"/>
-    <path d="M16 10a6 6 0 0 1 6 6" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M10 16a6 6 0 0 1 6-6" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
-    <circle cx="16" cy="16" r="2" fill="#38bdf8"/>
-    <path d="M16 14v-4M16 18v4M14 16h-4M18 16h4" stroke="#38bdf8" stroke-width="1" stroke-linecap="round"/>
-  </svg>`,
-  'icon-check-green': `<svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="16" r="14" stroke="#22c55e" stroke-width="1.5"/>
-    <path d="M10 16l4 4 8-8" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`,
-};
-
-document.querySelectorAll('[class^="icon-"]').forEach(el => {
-  const cls = Array.from(el.classList).find(c => c.startsWith('icon-'));
-  if (cls && iconMap[cls]) {
-    el.innerHTML = iconMap[cls];
-    el.style.display = 'flex';
-    el.style.alignItems = 'center';
-    el.style.justifyContent = 'center';
-  }
-});
-
 // --- SHOW VERIFICATION SUMMARY if session data exists ---
 const summarySection = document.querySelector('.verification-status-section');
 if (summarySection && (appType || uploadCount > 0)) {
@@ -141,9 +116,6 @@ const style = document.createElement('style');
 style.textContent = `
   .status-item {
     cursor: default;
-  }
-  .status-item svg {
-    filter: drop-shadow(0 0 6px rgba(56,189,248,0.3));
   }
   #cs-toast {
     position: fixed; bottom: 30px; left: 50%;

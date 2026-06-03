@@ -46,6 +46,81 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
+body.light-theme {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+body.light-theme .site-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .logo-text {
+    color: #0f172a;
+}
+
+body.light-theme .nav-links a {
+    color: #475569;
+}
+
+body.light-theme .nav-links a:hover {
+    color: #38bdf8;
+}
+
+body.light-theme .hero-title {
+    background: linear-gradient(to right, #0f172a, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .hero-subtitle {
+    color: #475569;
+}
+
+body.light-theme .btn-primary {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+body.light-theme .btn-secondary {
+    background: transparent;
+    color: #0f172a;
+    border-color: #0f172a;
+}
+
+body.light-theme .step-card {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+}
+
+body.light-theme .step-card:hover {
+    border-color: #0f172a;
+    background: rgba(56, 189, 248, 0.08);
+}
+
+body.light-theme .card-title {
+    color: #38bdf8;
+}
+
+body.light-theme .site-footer {
+    background: #f1f5f9;
+    border-color: rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+}
+
+body.light-theme .footer-email {
+    color: #475569;
+}
+
+body.light-theme .step-card,
+body.light-theme p,
+body.light-theme span,
+body.light-theme label {
+    color: #0f172a;
+}
+
 /* THE TOP BAR (HEADER) */
 .site-header {
     display: flex;
@@ -78,21 +153,44 @@ body {
 /* THE HERO SECTION (THE BIG WELCOME) */
 .hero-section {
     text-align: center;
-    padding: 100px 20px;
+    padding: 110px 20px 80px;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-    background: linear-gradient(to right, white, var(--civic-blue));
-    -webkit-background-clip: text; /* This puts the color inside the letters */
-    -webkit-text-fill-color: transparent;
+    font-size: 6.5rem;
+    line-height: 0.9;
+    margin: 8px 0 14px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.06);
+    color: #e6eef8;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    text-transform: none;
+}
+
+.hero-accent {
+    display: block;
+    color: var(--civic-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: unset;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: var(--text-gray);
     margin-bottom: 30px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-buttons {
@@ -170,6 +268,13 @@ body {
 }
 
 .card-title { color: var(--civic-blue); margin-bottom: 15px; }
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 768px) {
+    .hero-title { font-size: 3rem; line-height: 1; }
+    .hero-accent { font-size: 3rem; }
+    .hero-badge { font-size: 0.8rem; padding: 6px 12px; }
+}
 
 /* THE FOOTER */
 .site-footer {

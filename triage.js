@@ -11,14 +11,15 @@ const progressFill = document.querySelector('.progress-fill');
 // Wizard steps data
 const wizardSteps = [
   {
-    title: "What type of service do you need?",
-    description: "Select the service category that best matches your needs.",
-    question: "Select a service:",
+    title: "What are you applying for?",
+    description: "Select the exact application type you need from the available options.",
+    question: "Choose your application:",
     options: [
-      { id: "service-id", text: "Identity Document Application" },
-      { id: "service-passport", text: "Passport Services" },
-      { id: "service-license", text: "Driver's License" },
-      { id: "service-renewal", text: "Document Renewal" }
+      { id: "first-id", text: "First-time ID" },
+      { id: "replace-id", text: "ID Replacement" },
+      { id: "new-passport", text: "Passport - New" },
+      { id: "renew-passport", text: "Passport Renewal" },
+      { id: "birth-cert", text: "Birth Certificate" }
     ]
   },
   {
@@ -62,6 +63,13 @@ function goToNextStep() {
   
   if (!selectedOption) {
     alert("Please select an option to continue.");
+    return;
+  }
+
+  if (currentStep === 1) {
+    // Save the chosen application type and route into the application page.
+    sessionStorage.setItem('civicsync_app_type', selectedOption.value);
+    window.location.href = 'application.html';
     return;
   }
 

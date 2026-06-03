@@ -249,49 +249,13 @@
             </div>
           </div>
 
-          <div class="documents-grid">
-            <div class="document-card">
-              <div class="doc-icon">📄</div>
-              <div class="doc-name">SA ID Book</div>
-              <div class="doc-date">Uploaded: May 10, 2026</div>
-              <div class="doc-status status-verified">Verified</div>
-              <div class="doc-actions">
-                <button class="action-btn">View</button>
-                <button class="action-btn">Download</button>
-              </div>
-            </div>
+          <div class="documents-grid" id="documents-grid"></div>
 
-            <div class="document-card">
-              <div class="doc-icon">📋</div>
-              <div class="doc-name">Birth Certificate</div>
-              <div class="doc-date">Uploaded: May 8, 2026</div>
-              <div class="doc-status status-rejected">Rejected</div>
-              <div class="doc-actions">
-                <button class="action-btn">View</button>
-                <button class="action-btn">Reupload</button>
-              </div>
-            </div>
-
-            <div class="document-card">
-              <div class="doc-icon">🏠</div>
-              <div class="doc-name">Proof of Address</div>
-              <div class="doc-date">Uploaded: May 15, 2026</div>
-              <div class="doc-status status-pending">Pending Review</div>
-              <div class="doc-actions">
-                <button class="action-btn">View</button>
-                <button class="action-btn">Edit</button>
-              </div>
-            </div>
-
-            <div class="document-card">
-              <div class="doc-icon">📸</div>
-              <div class="doc-name">Passport Photo</div>
-              <div class="doc-date">Not uploaded</div>
-              <div class="doc-status status-pending">Upload Required</div>
-              <div class="doc-actions">
-                <button class="action-btn">Upload</button>
-              </div>
-            </div>
+          <div id="vault-empty" class="empty-state" style="display:none;">
+            <div class="empty-icon">🗂️</div>
+            <div class="empty-text">No documents uploaded yet</div>
+            <div class="empty-subtext">Sign in to view your document vault.</div>
+            <a href="upload.html" class="btn-upload">Upload a document</a>
           </div>
         </div>
       </main>

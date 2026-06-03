@@ -4,16 +4,35 @@
 const saveBtn = document.querySelector('.btn-save');
 const cancelBtn = document.querySelector('.btn-cancel');
 const deleteBtn = document.querySelector('.btn-danger');
-const toggleSwitches = document.querySelectorAll('input[type="checkbox"]');
+const themeToggle = document.querySelector('#theme-toggle');
+const toggleSwitches = document.querySelectorAll('input[type="checkbox"]:not(#theme-toggle)');
 const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
 const selectDropdowns = document.querySelectorAll('select');
 const infoBoxText = document.querySelector('.info-box-text');
+
+const themeKey = 'civicsync_theme';
 
 // Store original values
 const originalValues = {
   inputs: {},
   toggles: {},
   selects: {}
+};
+let originalThemeToggleValue = false;
+
+const applyTheme = (useLight) => {
+  document.body.classList.toggle('light-theme', useLight);
+  localStorage.setItem(themeKey, useLight ? 'light' : 'dark');
+};
+
+const loadThemeFromStorage = () => {
+  const savedTheme = localStorage.getItem(themeKey);
+  const useLight = savedTheme === 'light';
+  if (themeToggle) {
+    themeToggle.checked = useLight;
+  }
+  applyTheme(useLight);
+  originalThemeToggleValue = useLight;
 };
 
 // Load signed-in user data and populate form
@@ -45,6 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
       input.value = '';
     });
   }
+
+  loadThemeFromStorage();
   
   // Save original values on load
   textInputs.forEach((input, index) => {
@@ -72,23 +93,27 @@ if (saveBtn) {
       emailNotifications: toggleSwitches[1].checked,
       smsNotifications: toggleSwitches[2].checked,
       language: selectDropdowns[0].value,
-      theme: selectDropdowns[1].value
+      theme: themeToggle && themeToggle.checked ? 'light' : 'dark'
     };
-    
+
     console.log('Saving settings:', formData);
-    
-    // Show success message
+
+    if (themeToggle) {
+      applyTheme(themeToggle.checked);
+      originalThemeToggleValue = themeToggle.checked;
+    }
+
     alert('Settings saved successfully!');
-    
+
     // Update original values
     textInputs.forEach((input, index) => {
       originalValues.inputs[index] = input.value;
     });
-    
+
     toggleSwitches.forEach((toggle, index) => {
       originalValues.toggles[index] = toggle.checked;
     });
-    
+
     selectDropdowns.forEach((select, index) => {
       originalValues.selects[index] = select.value;
     });
@@ -107,6 +132,11 @@ if (cancelBtn) {
       toggleSwitches.forEach((toggle, index) => {
         toggle.checked = originalValues.toggles[index];
       });
+
+      if (themeToggle) {
+        themeToggle.checked = originalThemeToggleValue;
+        applyTheme(themeToggle.checked);
+      }
       
       selectDropdowns.forEach((select, index) => {
         select.value = originalValues.selects[index];
@@ -159,6 +189,10 @@ const trackChanges = () => {
       hasChanges = true;
     }
   });
+
+  if (themeToggle && themeToggle.checked !== originalThemeToggleValue) {
+    hasChanges = true;
+  }
   
   // Update button state
   if (saveBtn && cancelBtn) {
@@ -184,6 +218,13 @@ textInputs.forEach(input => {
 toggleSwitches.forEach(toggle => {
   toggle.addEventListener('change', trackChanges);
 });
+
+if (themeToggle) {
+  themeToggle.addEventListener('change', () => {
+    applyTheme(themeToggle.checked);
+    trackChanges();
+  });
+}
 
 selectDropdowns.forEach(select => {
   select.addEventListener('change', trackChanges);
