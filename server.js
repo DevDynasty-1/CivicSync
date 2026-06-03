@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 app.use(express.static(path.join(__dirname)));
 
-// Initialize Supabase with the service role key (admin)
+// Initialize Supabase with the ADMIN key
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 // ─── EMAIL ROUTE ──────────────────────────────────────────────────────────────
@@ -46,6 +46,35 @@ app.post('/api/send-confirmation', async (req, res) => {
     }
 });
 
+// ─── SUPABASE & ADMIN ROUTES ──────────────────────────────────────────────────
+
+// Middleware to check if the user is a Supervisor
+const verifySupervisor = async (req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ error: "No token provided" });
+
+    // Verify the token with Supabase
+    const { data: { user }, error } = await supabase.auth.getUser(token);
+    
+    if (error || !user) return res.status(401).json({ error: "Invalid token" });
+    
+    // Check the custom role metadata we set during registration
+    if (user.user_metadata?.role !== 'supervisor') {
+        return res.status(403).json({ error: "Access denied: Supervisors only" });
+    }
+    
+    next(); // User is a supervisor, allow them through
+};
+
+// Protected Admin Route
+app.get('/api/admin/dashboard', verifySupervisor, async (req, res) => {
+    // Because the middleware passed, we know a supervisor is asking for this data
+    const { data, error } = await supabase.auth.admin.listUsers();
+    
+    if (error) return res.status(500).json({ error: error.message });
+    res.json({ users: data.users, message: "Welcome to the Admin Dashboard" });
+});
+
 // The South African ID Luhn Check Algorithm
 const validateSAID = (id) => {
     if (!/^\d{13}$/.test(id)) return false;
@@ -67,18 +96,24 @@ app.post('/api/register', async (req, res) => {
     const { email, password, fullName, idNumber } = req.body;
     if (!validateSAID(idNumber)) return res.status(400).json({ error: 'Invalid South African ID Number' });
 
-    try {
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-            options: { data: { full_name: fullName, id_number: idNumber, role: 'citizen' } },
-        });
-        if (error) return res.status(400).json({ error: error.message });
-        res.status(200).json({ message: 'Registration successful', user: data.user });
-    } catch (err) {
-        console.error('Registration error:', err);
-        res.status(500).json({ error: 'Registration failed' });
-    }
+    // 2. If valid, process the registration with Supabase
+    const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+            data: {
+                full_name: fullName,
+                id_number: idNumber,
+                role: 'citizen' // Default role
+            }
+        }
+    });
+
+    if (error) return res.status(400).json({ error: error.message });
+    res.status(200).json({ message: "Registration successful", user: data.user });
 });
 
-
+// ─── START SERVER ─────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+    console.log(`CivicSync server running at http://localhost:${PORT}`);
+});

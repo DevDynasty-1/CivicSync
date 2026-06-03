@@ -1,6 +1,4 @@
 
-//<<<<<<< HEAD
-//=======
 // ─── EMAILJS CONFIGURATION ──────────────────────────────────────────────────────
 // SETUP INSTRUCTIONS:
 // 1. Go to https://www.emailjs.com and create a free account
