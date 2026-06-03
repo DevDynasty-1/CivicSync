@@ -10,7 +10,7 @@
     <header class="site-header transparent-header">
       <div class="logo-container">
         <img
-          src="Images/civicsync-logo.png"
+          src="Images/civicsync-logo.jpg"
           alt="CivicSync Logo"
           class="logo-icon"
         />
@@ -34,6 +34,13 @@
         <p class="page-subtitle">
           Securely upload your documents for pre-verification
         </p>
+        <div class="selected-application-banner" id="selected-application-banner" hidden>
+          <div>
+            <span class="selected-application-label">Selected application:</span>
+            <strong class="selected-application-type" id="selected-application-type"></strong>
+          </div>
+          <p class="selected-application-description" id="selected-application-description"></p>
+        </div>
       </section>
 
       <section class="upload-card">
@@ -61,18 +68,18 @@
             </div>
             <div class="doc-status">
               <span class="status-circle" aria-hidden="true"></span>
-              <span class="status-text">Uploaded</span>
+              <span class="status-text">Not uploaded</span>
             </div>
           </li>
 
           <li class="doc-item">
             <div class="doc-info">
               <span class="icon-file-doc" aria-hidden="true"></span>
-              <span class="doc-name">Proof of Residence</span>
+              <span class="doc-name">Parent/Guardian Proof (if applicable)</span>
             </div>
             <div class="doc-status">
               <span class="status-circle" aria-hidden="true"></span>
-              <span class="status-text">Uploaded</span>
+              <span class="status-text">Not uploaded</span>
             </div>
           </li>
 
@@ -83,7 +90,7 @@
             </div>
             <div class="doc-status">
               <span class="status-circle" aria-hidden="true"></span>
-              <span class="status-text">Uploaded</span>
+              <span class="status-text">Not uploaded</span>
             </div>
           </li>
         </ul>

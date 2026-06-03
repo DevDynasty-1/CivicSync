@@ -1,4 +1,18 @@
+// ─── HELPER FUNCTIONS ────────────────────────────────────────────────────
+function getUploadedDocuments() {
+    const uploadedJson = sessionStorage.getItem('civicsync_uploaded_files');
+    if (!uploadedJson) return [];
+    try {
+        const arr = JSON.parse(uploadedJson);
+        return Array.isArray(arr) ? arr : [];
+    } catch {
+        return [];
+    }
+}
+
+// ─── GREETING & USER NAME ────────────────────────────────────────────────────
 const greetingEl = document.querySelector(".greeting");
+const greetingSubtitle = document.querySelector(".greeting-subtitle");
 
 if (greetingEl) {
     const hour = new Date().getHours();
@@ -23,6 +37,26 @@ if (greetingEl) {
     greetingEl.textContent = `${greeting}, ${userName}`;
 }
 
+// Update subtitle with submission status
+function updateGreetingSubtitle() {
+    if (greetingSubtitle) {
+        const uploadedDocs = getUploadedDocuments();
+        const TOTAL_REQUIRED = 4;
+        const remaining = TOTAL_REQUIRED - uploadedDocs.length;
+        
+        if (uploadedDocs.length === 0) {
+            greetingSubtitle.textContent = `Start your application - ${TOTAL_REQUIRED} documents needed.`;
+        } else if (uploadedDocs.length === TOTAL_REQUIRED) {
+            greetingSubtitle.textContent = "All documents submitted! Your application is complete.";
+        } else {
+            greetingSubtitle.textContent = `You have submitted ${uploadedDocs.length}/${TOTAL_REQUIRED} documents. ${remaining} more to go.`;
+        }
+    }
+}
+
+updateGreetingSubtitle();
+
+// ─── ALERT BANNER ACTION BUTTON ────────────────────────────────────────────────
 const fixBtn = document.querySelector(".btn-alert-action");
 
 if (fixBtn) {
@@ -31,64 +65,105 @@ if (fixBtn) {
     });
 }
 
-const docItems = document.querySelectorAll(".doc-status-item");
+// Update alert banner visibility based on uploads
+function updateAlertBanner() {
+    const alertBanner = document.querySelector(".alert-banner");
+    const uploadedDocs = getUploadedDocuments();
+    
+    if (uploadedDocs.length === 0 && alertBanner) {
+        // Hide alert if no documents submitted yet
+        alertBanner.style.display = "none";
+    } else if (alertBanner) {
+        alertBanner.style.display = "block";
+    }
+}
+
+updateAlertBanner();
+
+// ─── POPULATE DOCUMENT LIST FROM UPLOADS ──────────────────────────────────
+function populateDocumentList() {
+    const docStatusList = document.querySelector(".doc-status-list");
+    if (!docStatusList) return;
+    
+    const uploadedDocs = getUploadedDocuments();
+    const TOTAL_REQUIRED = 4;
+    
+    // Clear existing items
+    docStatusList.innerHTML = '';
+    
+    if (uploadedDocs.length === 0) {
+        // Show empty state message
+        const emptyItem = document.createElement('li');
+        emptyItem.className = 'doc-status-item empty-state';
+        emptyItem.innerHTML = `<p style="text-align: center; color: #999;">0/${TOTAL_REQUIRED} documents uploaded</p>`;
+        docStatusList.appendChild(emptyItem);
+        return;
+    }
+    
+    // Render each uploaded document with status "Uploaded"
+    uploadedDocs.forEach(doc => {
+        const li = document.createElement('li');
+        li.className = 'doc-status-item';
+        li.innerHTML = `
+            <span class="doc-name">${doc.name || 'Document'}</span>
+            <span class="status-badge badge-verified">Uploaded</span>
+        `;
+        docStatusList.appendChild(li);
+    });
+}
+
+populateDocumentList();
+
+// ─── GET CURRENT DOC ITEMS ────────────────────────────────────────────────────
+let docItems = document.querySelectorAll(".doc-status-item:not(.empty-state)");
 
 function updateStats() {
-    let verified = 0;
-    let total = docItems.length;
-    docItems.forEach(item => {
-        const status = item.querySelector(".status-badge");
-        if (status.classList.contains("badge-verified")) {
-            verified++;
-        }
-    });
-    const statValue = document.querySelector(".stat-card .stat-value");
-    if (statValue) {
-        statValue.textContent = `${verified} / ${total}`;
+    const uploadedDocs = getUploadedDocuments();
+    const TOTAL_REQUIRED = 4;
+    const verified = uploadedDocs.length;
+    
+    const statValues = document.querySelectorAll(".stat-card .stat-value");
+    if (statValues.length > 0) {
+        statValues[0].textContent = `${verified} / ${TOTAL_REQUIRED}`;
     }
 }
 
 updateStats();
 
+// ─── UPDATE APPLICATION STATUS ────────────────────────────────────────────────
 const statusBadge = document.querySelector(".badge-progress");
 
 function updateApplicationStatus() {
-    let hasRejected = false;
-    let allVerified = true;
-    docItems.forEach(item => {
-        const status = item.querySelector(".status-badge");
-        if (status.classList.contains("badge-rejected")) {
-            hasRejected = true;
-        }
-        if (!status.classList.contains("badge-verified")) {
-            allVerified = false;
-        }
-    });
+    const uploadedDocs = getUploadedDocuments();
+    const TOTAL_REQUIRED = 4;
+    
     if (statusBadge) {
-        if (hasRejected) {
-            statusBadge.textContent = "Action Required";
-            statusBadge.classList.add("badge-warning");
-        } else if (allVerified) {
-            statusBadge.textContent = "Complete";
-            statusBadge.classList.add("badge-success");
-        } else {
+        if (uploadedDocs.length === 0) {
+            statusBadge.textContent = "Not Started";
+            statusBadge.classList.remove("badge-progress", "badge-warning", "badge-success");
+            statusBadge.classList.add("badge-pending");
+        } else if (uploadedDocs.length < TOTAL_REQUIRED) {
             statusBadge.textContent = "In Progress";
+            statusBadge.classList.remove("badge-warning", "badge-success", "badge-pending");
+            statusBadge.classList.add("badge-progress");
+        } else if (uploadedDocs.length === TOTAL_REQUIRED) {
+            statusBadge.textContent = "Complete";
+            statusBadge.classList.remove("badge-progress", "badge-warning", "badge-pending");
+            statusBadge.classList.add("badge-success");
         }
     }
 }
 
 updateApplicationStatus();
 
+// ─── BOOKING LOCK/UNLOCK ────────────────────────────────────────────────────
 const bookingCard = document.querySelectorAll(".stat-card")[2];
 
 function unlockBooking() {
-    let allVerified = true;
-    docItems.forEach(item => {
-        const status = item.querySelector(".status-badge");
-        if (!status.classList.contains("badge-verified")) {
-            allVerified = false;
-        }
-    });
+    const uploadedDocs = getUploadedDocuments();
+    const TOTAL_REQUIRED = 4;
+    const allVerified = uploadedDocs.length === TOTAL_REQUIRED;
+    
     if (bookingCard) {
         const bookingText = bookingCard.querySelector(".stat-value");
         if (allVerified) {
@@ -103,12 +178,19 @@ function unlockBooking() {
 
 unlockBooking();
 
-docItems.forEach(item => {
-    item.addEventListener("click", () => {
-        window.location.href = "vault.html";
+// ─── DOCUMENT ITEM CLICK HANDLER ──────────────────────────────────────────────
+function attachDocumentListeners() {
+    const docItems = document.querySelectorAll(".doc-status-item:not(.empty-state)");
+    docItems.forEach(item => {
+        item.addEventListener("click", () => {
+            window.location.href = "vault.html";
+        });
     });
-});
+}
 
+attachDocumentListeners();
+
+// ─── SIDEBAR NAVIGATION ────────────────────────────────────────────────────
 document.querySelectorAll(".sidebar-nav a").forEach(link => {
     link.addEventListener("click", () => {
         document.querySelectorAll(".sidebar-nav a").forEach(l => l.classList.remove("active"));

@@ -48,21 +48,36 @@ const continueBtn = document.querySelector('.btn-continue');
 // Highlight selected card and update button state
 radios.forEach(radio => {
   radio.addEventListener('change', () => {
-    // Remove active class from all labels
     document.querySelectorAll('.card-label').forEach(label => {
       label.classList.remove('card-selected');
     });
-    // Add to the chosen one
     radio.nextElementSibling.classList.add('card-selected');
     continueBtn.disabled = false;
     continueBtn.style.opacity = '1';
+    continueBtn.style.cursor = 'pointer';
   });
 });
+
+function selectApplicationType(appType) {
+  const matchingRadio = document.querySelector(`input[name="appType"][value="${appType}"]`);
+  if (!matchingRadio) return;
+
+  matchingRadio.checked = true;
+  matchingRadio.nextElementSibling.classList.add('card-selected');
+  continueBtn.disabled = false;
+  continueBtn.style.opacity = '1';
+  continueBtn.style.cursor = 'pointer';
+}
 
 // Disable continue button until a selection is made
 continueBtn.disabled = true;
 continueBtn.style.opacity = '0.5';
 continueBtn.style.cursor = 'not-allowed';
+
+const savedAppType = sessionStorage.getItem('civicsync_app_type');
+if (savedAppType) {
+  selectApplicationType(savedAppType);
+}
 
 // On form submit — save selection and checklist, redirect to document vault
 form.addEventListener('submit', (e) => {

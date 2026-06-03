@@ -133,6 +133,32 @@
         color: white;
       }
 
+      .theme-toggle-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .theme-toggle-label {
+        color: #cbd5e1;
+        font-weight: 600;
+      }
+
+      .theme-toggle-label span {
+        font-weight: 400;
+        display: block;
+        color: #94a3b8;
+        font-size: 0.95rem;
+      }
+
+      body.light-theme .theme-toggle-label {
+        color: #0f172a;
+      }
+
+      body.light-theme .theme-toggle-label span {
+        color: #475569;
+      }
+
       .button-group {
         display: flex;
         gap: 15px;
@@ -310,17 +336,6 @@
 
             <div class="setting-item">
               <div class="setting-label">
-                <div class="setting-label-text">Two-Factor Authentication</div>
-                <div class="setting-description">Add extra security to your account</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-              </label>
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-label">
                 <div class="setting-label-text">Email Notifications</div>
                 <div class="setting-description">Receive updates about your applications</div>
               </div>
@@ -363,27 +378,19 @@
 
             <div class="setting-item">
               <div class="setting-label">
-                <div class="setting-label-text">Language</div>
-                <div class="setting-description">Choose your preferred language</div>
-              </div>
-              <select class="select-dropdown">
-                <option>English</option>
-                <option>Afrikaans</option>
-                <option>Zulu</option>
-                <option>Xhosa</option>
-              </select>
-            </div>
-
-            <div class="setting-item">
-              <div class="setting-label">
                 <div class="setting-label-text">Theme</div>
-                <div class="setting-description">Select your preferred theme</div>
+                <div class="setting-description">Toggle between dark and light mode</div>
               </div>
-              <select class="select-dropdown">
-                <option>Dark (Current)</option>
-                <option>Light</option>
-                <option>Auto</option>
-              </select>
+              <div class="theme-toggle-row">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="theme-toggle" />
+                  <span class="slider"></span>
+                </label>
+                <div class="theme-toggle-label">
+                  Light mode
+                  <span>Enable a bright interface across every page.</span>
+                </div>
+              </div>
             </div>
           </div>
 

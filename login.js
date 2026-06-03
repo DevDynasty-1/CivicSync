@@ -110,8 +110,10 @@ form.addEventListener('submit', async (e) => {
   // Check role and persist session
   const userRole = data.user.user_metadata.role;
   const userName = data.user.user_metadata.full_name || 'User';
+  const userEmail = data.user.email || '';
+  const userPhone = data.user.user_metadata.phone || '';
   
-  sessionStorage.setItem('civicsync_user', JSON.stringify({ name: userName, role: userRole }));
+  sessionStorage.setItem('civicsync_user', JSON.stringify({ name: userName, role: userRole, email: userEmail, phone: userPhone }));
   showToast(`Welcome back, ${userName}!`, 'success');
 
   setTimeout(() => {

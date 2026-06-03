@@ -35,6 +35,171 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
+body.light-theme {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+body.light-theme .site-header {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .sidebar {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .dashboard-content,
+body.light-theme .dashboard-layout {
+    background: transparent;
+}
+
+body.light-theme .sidebar-nav a,
+body.light-theme .nav-links a,
+body.light-theme .logo-text,
+body.light-theme .greeting,
+body.light-theme .greeting-subtitle {
+    color: #0f172a;
+}
+
+body.light-theme .sidebar-nav a.active {
+    background: rgba(56, 189, 248, 0.12);
+    color: #0f172a;
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .sidebar-nav a:hover {
+    color: #0f172a;
+}
+
+body.light-theme .btn-primary {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+body.light-theme .btn-cancel,
+body.light-theme .btn-back,
+body.light-theme .filter-btn,
+body.light-theme .action-btn,
+body.light-theme .search-box,
+body.light-theme .select-dropdown {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+body.light-theme .search-box:focus,
+body.light-theme .select-dropdown:focus {
+    background: #ffffff;
+}
+
+body.light-theme .select-dropdown option {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+body.light-theme .settings-section,
+body.light-theme .wizard-step,
+body.light-theme .vault-toolbar,
+body.light-theme .document-card,
+body.light-theme .option-item label,
+body.light-theme .info-box,
+body.light-theme .profile-dropdown {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .settings-title,
+body.light-theme .setting-label-text,
+body.light-theme .setting-description,
+body.light-theme .step-title,
+body.light-theme .step-description,
+body.light-theme .question-label,
+body.light-theme .doc-name,
+body.light-theme .doc-date,
+body.light-theme .empty-state,
+body.light-theme .empty-text,
+body.light-theme .empty-subtext,
+body.light-theme .profile-dropdown-title,
+body.light-theme .dropdown-item {
+    color: #0f172a;
+}
+
+body.light-theme .theme-toggle-label,
+body.light-theme .theme-toggle-label span {
+    color: #0f172a;
+}
+
+body.light-theme .profile-avatar-button {
+    background: rgba(15,23,42,0.06);
+    color: #0f172a;
+    border-color: rgba(15,23,42,0.12);
+}
+
+body.light-theme .profile-dropdown {
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+body.light-theme .dropdown-item:hover,
+body.light-theme .dropdown-action:hover,
+body.light-theme .filter-btn:hover,
+body.light-theme .btn-back:hover,
+body.light-theme .document-card:hover {
+    background: rgba(56, 189, 248, 0.12);
+}
+
+body.light-theme .badge-verified {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+}
+
+body.light-theme .badge-rejected {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+body.light-theme textarea,
+body.light-theme input[type="text"],
+body.light-theme input[type="email"],
+body.light-theme input[type="date"],
+body.light-theme input[type="number"] {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+body.light-theme textarea:focus,
+body.light-theme input[type="text"]:focus,
+body.light-theme input[type="email"]:focus,
+body.light-theme input[type="date"]:focus,
+body.light-theme input[type="number"]:focus {
+    background: #ffffff;
+    border-color: #0f172a;
+}
+
+body.light-theme label,
+body.light-theme p,
+body.light-theme span,
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+    color: #0f172a;
+}
+
+body.light-theme .wizard-step-number,
+body.light-theme .success-message {
+    color: #22c55e;
+}
+
+body.light-theme .error-text,
+body.light-theme .error-message {
+    color: #ef4444;
+}
+
 /* THE SIDEBAR (Your Left-Hand Menu) */
 .dashboard-layout {
     display: flex; /* puts the sidebar and content side-by-side */

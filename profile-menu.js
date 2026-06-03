@@ -1,11 +1,24 @@
 const ProfileMenu = (() => {
   const userKey = 'civicsync_user';
+  const themeKey = 'civicsync_theme';
 
   function getCurrentUser() {
     try {
       return JSON.parse(sessionStorage.getItem(userKey));
     } catch (error) {
       return null;
+    }
+  }
+
+  function applySavedTheme() {
+    const theme = localStorage.getItem(themeKey);
+    const apply = () => {
+      document.body.classList.toggle('light-theme', theme === 'light');
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', apply);
+    } else {
+      apply();
     }
   }
 
@@ -23,6 +36,14 @@ const ProfileMenu = (() => {
 
     const user = getCurrentUser();
     const initials = user ? getInitials(user.name || user.email) : 'A';
+
+    // Hide "Get Started" button if user is logged in
+    if (user) {
+      const getStartedBtn = headerAction.querySelector('a[href="register.html"]');
+      if (getStartedBtn) {
+        getStartedBtn.style.display = 'none';
+      }
+    }
 
     const wrapper = document.createElement('div');
     wrapper.className = 'profile-menu';
@@ -203,6 +224,7 @@ const ProfileMenu = (() => {
   }
 
   function init() {
+    applySavedTheme();
     injectStyles();
     createMenu();
   }

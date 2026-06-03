@@ -200,6 +200,7 @@ form.addEventListener('submit', async (e) => {
   sessionStorage.setItem('civicsync_user', JSON.stringify({
     name:  nameInput.value.trim(),
     email: emailInput.value.trim(),
+    phone: '',
     id:    idInput.value.trim(),
   }));
 

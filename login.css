@@ -51,6 +51,77 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
+body.light-theme {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    color: #0f172a;
+}
+
+body.light-theme .auth-card {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .auth-left {
+    background: rgba(56, 189, 248, 0.08);
+}
+
+body.light-theme .auth-right {
+    background: #f8fafc;
+}
+
+body.light-theme .logo-text,
+body.light-theme .auth-heading {
+    color: #0f172a;
+}
+
+body.light-theme .auth-heading-italic {
+    color: #fbbf24;
+}
+
+body.light-theme .form-title {
+    color: #0f172a;
+}
+
+body.light-theme .form-group input {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.12);
+    color: #0f172a;
+}
+
+body.light-theme .form-group input:focus {
+    border-color: #0f172a;
+    background: #f1f5f9;
+}
+
+body.light-theme .btn-primary {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+body.light-theme .forgot-password-link,
+body.light-theme .auth-link {
+    color: #0f172a;
+}
+
+body.light-theme .auth-footer-text {
+    color: #475569;
+}
+
+body.light-theme .divider-line {
+    background: rgba(15, 23, 42, 0.1);
+}
+
+body.light-theme .divider-text {
+    color: #475569;
+}
+
+body.light-theme label,
+body.light-theme p,
+body.light-theme span,
+body.light-theme input::placeholder {
+    color: #0f172a;
+}
+
 /* THE LOGIN CARD (The Container) */
 .auth-card {
     display: flex; /* Puts the left logo area and the right form area side-by-side */

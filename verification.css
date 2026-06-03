@@ -36,6 +36,53 @@ body {
     animation: fadeIn 0.6s ease-in-out;
 }
 
+body.light-theme {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+body.light-theme .site-header {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .nav-links a {
+    color: #475569;
+}
+
+body.light-theme .nav-links a:hover {
+    color: #0f172a;
+}
+
+body.light-theme .page-title {
+    color: #0f172a;
+}
+
+body.light-theme .id-card-wrapper {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .success-message {
+    color: #22c55e;
+}
+
+body.light-theme .status-text {
+    color: #475569;
+}
+
+body.light-theme .btn-large {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+body.light-theme .id-card-wrapper,
+body.light-theme label,
+body.light-theme p,
+body.light-theme span {
+    color: #0f172a;
+}
+
 /* HEADER */
 .site-header {
     display: flex;
@@ -109,6 +156,13 @@ body {
     font-size: 0.9rem;
     font-weight: 600;
     color: #cbd5e1;
+}
+
+.status-icon {
+    font-size: 1.8rem;
+    color: var(--success-green);
+    font-weight: bold;
+    margin-top: 8px;
 }
 
 /* THE BIG PROCEED BUTTON */

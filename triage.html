@@ -192,29 +192,33 @@
 
           <div class="wizard-step">
             <div class="step-number">1</div>
-            <h2 class="step-title">What type of service do you need?</h2>
+            <h2 class="step-title">What are you applying for?</h2>
             <p class="step-description">
-              Select the service category that best matches your needs. This will help us guide you through the appropriate process.
+              Select the exact application type you need. This will take you to the right checklist and process.
             </p>
 
             <div class="question-group">
-              <label class="question-label">Select a service:</label>
+              <label class="question-label">Choose your application:</label>
               <div class="question-options">
                 <div class="option-item">
-                  <input type="radio" id="service-id" name="service" value="id" />
-                  <label for="service-id">Identity Document Application</label>
+                  <input type="radio" id="first-id" name="wizardOption" value="first-id" />
+                  <label for="first-id">First-time ID</label>
                 </div>
                 <div class="option-item">
-                  <input type="radio" id="service-passport" name="service" value="passport" />
-                  <label for="service-passport">Passport Services</label>
+                  <input type="radio" id="replace-id" name="wizardOption" value="replace-id" />
+                  <label for="replace-id">ID Replacement</label>
                 </div>
                 <div class="option-item">
-                  <input type="radio" id="service-license" name="service" value="license" />
-                  <label for="service-license">Driver's License</label>
+                  <input type="radio" id="new-passport" name="wizardOption" value="new-passport" />
+                  <label for="new-passport">Passport - New</label>
                 </div>
                 <div class="option-item">
-                  <input type="radio" id="service-renewal" name="service" value="renewal" />
-                  <label for="service-renewal">Document Renewal</label>
+                  <input type="radio" id="renew-passport" name="wizardOption" value="renew-passport" />
+                  <label for="renew-passport">Passport Renewal</label>
+                </div>
+                <div class="option-item">
+                  <input type="radio" id="birth-cert" name="wizardOption" value="birth-cert" />
+                  <label for="birth-cert">Birth Certificate</label>
                 </div>
               </div>
             </div>
