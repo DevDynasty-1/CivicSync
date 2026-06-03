@@ -7,6 +7,7 @@
     --text-muted: #cbd5e1;
 }
 
+<<<<<<< HEAD
 /* PAGE TRANSITION ANIMATIONS */
 @keyframes fadeIn {
     from {
@@ -28,6 +29,8 @@
     }
 }
 
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -37,6 +40,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -113,6 +117,8 @@ body.light-theme p,
 body.light-theme span,
 body.light-theme input::placeholder {
     color: #0f172a;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* THE CARD BOX */
@@ -126,7 +132,10 @@ body.light-theme input::placeholder {
     max-width: 900px;
     width: 90%;
     min-height: 550px; /* Slightly taller to fit the Google button */
+<<<<<<< HEAD
     animation: slideInUp 0.7s ease-out;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* LEFT BRAND AREA */
@@ -175,7 +184,10 @@ body.light-theme input::placeholder {
     border-radius: 10px;
     color: white;
     box-sizing: border-box;
+<<<<<<< HEAD
     transition: all 0.3s ease;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .form-group input:focus {
@@ -191,12 +203,16 @@ body.light-theme input::placeholder {
     border-radius: 10px;
     font-weight: 800;
     cursor: pointer;
+<<<<<<< HEAD
     transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+=======
+    margin-top: 10px;
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* THE "OR" DIVIDER */

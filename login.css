@@ -7,6 +7,7 @@
     --text-muted: #cbd5e1;
 }
 
+<<<<<<< HEAD
 /* PAGE TRANSITION ANIMATIONS */
 @keyframes fadeIn {
     from {
@@ -39,6 +40,8 @@
     }
 }
 
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -47,6 +50,7 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     justify-content: center;
     animation: fadeIn 0.6s ease-in-out;
 }
@@ -120,6 +124,9 @@ body.light-theme p,
 body.light-theme span,
 body.light-theme input::placeholder {
     color: #0f172a;
+=======
+    justify-content: center; 
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* THE LOGIN CARD (The Container) */
@@ -133,7 +140,10 @@ body.light-theme input::placeholder {
     max-width: 900px;
     width: 90%;
     min-height: 500px;
+<<<<<<< HEAD
     animation: slideInUp 0.7s ease-out;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* LEFT SIDE (The Brand Area) */
@@ -193,7 +203,10 @@ body.light-theme input::placeholder {
     color: white;
     font-size: 1rem;
     box-sizing: border-box;
+<<<<<<< HEAD
     transition: all 0.3s ease;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .form-group input:focus {
@@ -211,7 +224,11 @@ body.light-theme input::placeholder {
     font-weight: 800;
     font-size: 1rem;
     cursor: pointer;
+<<<<<<< HEAD
     transition: all 0.3s ease;
+=======
+    transition: 0.3s;
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .btn-primary:hover {

@@ -6,6 +6,7 @@
     --glass: rgba(255, 255, 255, 0.05);
 }
 
+<<<<<<< HEAD
 /* PAGE TRANSITION ANIMATIONS */
 @keyframes fadeIn {
     from {
@@ -27,12 +28,15 @@
     }
 }
 
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: white;
     min-height: 100vh;
+<<<<<<< HEAD
     animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -81,6 +85,8 @@ body.light-theme label,
 body.light-theme p,
 body.light-theme span {
     color: #0f172a;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* HEADER */

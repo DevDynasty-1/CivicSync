@@ -7,6 +7,7 @@
     --text-muted: #cbd5e1;
 }
 
+<<<<<<< HEAD
 /* PAGE TRANSITION ANIMATIONS */
 @keyframes fadeIn {
     from {
@@ -28,12 +29,15 @@
     }
 }
 
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: white;
     min-height: 100vh;
+<<<<<<< HEAD
     animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -100,6 +104,8 @@ body.light-theme label,
 body.light-theme p,
 body.light-theme span {
     color: #0f172a;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* HEADER */
@@ -123,6 +129,7 @@ body.light-theme span {
     margin: 60px auto;
     padding: 0 20px;
     text-align: center;
+<<<<<<< HEAD
     animation: slideInUp 0.7s ease-out 0.1s backwards;
 }
 
@@ -156,6 +163,8 @@ body.light-theme span {
     color: #cbd5e1;
     font-size: 0.92rem;
     line-height: 1.5;
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .upload-card {
@@ -172,7 +181,11 @@ body.light-theme span {
     border-radius: 15px;
     padding: 50px 20px;
     background: rgba(56, 189, 248, 0.02);
+<<<<<<< HEAD
     transition: all 0.3s ease;
+=======
+    transition: 0.3s;
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
     margin-bottom: 30px;
 }
 
@@ -195,13 +208,20 @@ body.light-theme span {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
+<<<<<<< HEAD
     transition: all 0.3s ease;
+=======
+    transition: 0.3s;
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .btn-browse:hover {
     background: white;
     color: var(--dark-navy);
+<<<<<<< HEAD
     transform: translateY(-2px);
+=======
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 /* THE DOCUMENT LIST */

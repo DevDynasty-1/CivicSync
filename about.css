@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
     --primary-blue: #38bdf8;
     --accent-gold: #fbbf24;
@@ -96,6 +97,15 @@ body.light-theme span {
         opacity: 1;
         transform: translateY(0);
     }
+=======
+/* colors & basic theme */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; 
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Deep Dark Blue */
+    color: white;
+    min-height: 100vh;
+>>>>>>> a20ec14811ccdba065eb38120bf20bc9b51c9942
 }
 
 .site-header {
