@@ -8,38 +8,58 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 app.use(express.static(path.join(__dirname)));
 
-// Initialize Supabase with the ADMIN key
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
-// ─── EMAIL ROUTE ──────────────────────────────────────────────────────────────
+// Middleware to check if the user is a Supervisor/Admin
+const verifySupervisor = async (req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ error: "No token provided" });
+
+    const { data: { user }, error } = await supabase.auth.getUser(token);
+    if (error || !user) return res.status(401).json({ error: "Invalid token" });
+    
+    if (user.user_metadata?.role !== 'supervisor') {
+        return res.status(403).json({ error: "Access denied: Supervisors only" });
+    }
+    next(); 
+};
+
+// ─── REGISTRATION & AUTH ──────────────────────────────────────────────────────
+const validateSAID = (id) => {
+    if (!/^\d{13}$/.test(id)) return false;
+    let total = 0;
+    for (let i = 0; i < 12; i++) {
+        let digit = parseInt(id[i], 10);
+        if (i % 2 !== 0) { digit *= 2; if (digit > 9) digit -= 9; }
+        total += digit;
+    }
+    const checkDigit = (10 - (total % 10)) % 10;
+    return checkDigit === parseInt(id[12], 10);
+};
+
+app.post('/api/register', async (req, res) => {
+    const { email, password, fullName, idNumber } = req.body;
+    if (!validateSAID(idNumber)) return res.status(400).json({ error: "Invalid South African ID" });
+
+    const { data, error } = await supabase.auth.signUp({
+        email, password, options: { data: { full_name: fullName, id_number: idNumber, role: 'citizen', account_status: 'active' } }
+    });
+
+    if (error) return res.status(400).json({ error: error.message });
+    res.status(200).json({ message: "Registration successful", user: data.user });
+});
+
+// ─── EMAIL CONFIRMATION ───────────────────────────────────────────────────────
 app.post('/api/send-confirmation', async (req, res) => {
     const { userEmail, userName, bookingRef, office, address, date, time, bookedAt, mapsLink, qrCodeBase64 } = req.body;
-
     try {
-        await emailjs.send(
-            process.env.EMAILJS_SERVICE_ID,
-            process.env.EMAILJS_TEMPLATE_ID,
-            {
-                to_email:  userEmail,
-                to_name:   userName,
-                ref:       bookingRef,
-                office:    office,
-                address:   address,
-                date:      date,
-                time:      time,
-                booked_at: bookedAt,
-                maps_link: mapsLink,
-                qr_image:  qrCodeBase64,
-            },
-            {
-                publicKey:  process.env.EMAILJS_PUBLIC_KEY,
-                privateKey: process.env.EMAILJS_PRIVATE_KEY,
-            }
+        await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID,
+            { to_email: userEmail, to_name: userName, ref: bookingRef, office, address, date, time, booked_at: bookedAt, maps_link: mapsLink, qr_image: qrCodeBase64 },
+            { publicKey: process.env.EMAILJS_PUBLIC_KEY, privateKey: process.env.EMAILJS_PRIVATE_KEY }
         );
         res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
@@ -48,78 +68,80 @@ app.post('/api/send-confirmation', async (req, res) => {
     }
 });
 
-// ─── SUPABASE & ADMIN ROUTES ──────────────────────────────────────────────────
-
-// Middleware to check if the user is a Supervisor
-const verifySupervisor = async (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) return res.status(401).json({ error: "No token provided" });
-
-    // Verify the token with Supabase
-    const { data: { user }, error } = await supabase.auth.getUser(token);
+// ─── BOOKINGS ENGINE ──────────────────────────────────────────────────────────
+app.post('/api/bookings', async (req, res) => {
+    const { reference, citizen_name, citizen_email, office, date, time } = req.body;
     
-    if (error || !user) return res.status(401).json({ error: "Invalid token" });
-    
-    // Check the custom role metadata we set during registration
-    if (user.user_metadata?.role !== 'supervisor') {
-        return res.status(403).json({ error: "Access denied: Supervisors only" });
-    }
-    
-    next(); // User is a supervisor, allow them through
-};
+    const { error } = await supabase.from('bookings').insert([
+        { reference, citizen_name, citizen_email, office, date, time, status: 'Confirmed' }
+    ]);
 
-// Protected Admin Route
-app.get('/api/admin/dashboard', verifySupervisor, async (req, res) => {
-    // Because the middleware passed, we know a supervisor is asking for this data
+    if (error) return res.status(500).json({ error: "Database error: Failed to save booking." });
+    res.status(200).json({ message: "Booking securely saved." });
+});
+
+app.delete('/api/bookings/:ref', async (req, res) => {
+    const bookingRef = req.params.ref;
+    const { error } = await supabase.from('bookings').delete().eq('reference', bookingRef);
+    
+    if (error) return res.status(500).json({ error: 'Failed to cancel booking' });
+    res.status(200).json({ message: `Booking ${bookingRef} cancelled.` });
+});
+
+app.get('/api/admin/bookings', verifySupervisor, async (req, res) => {
+    const { data, error } = await supabase.from('bookings').select('*').order('created_at', { ascending: false });
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(data);
+});
+
+// ─── ADMIN CITIZEN MANAGEMENT ─────────────────────────────────────────────────
+app.get('/api/admin/users', verifySupervisor, async (req, res) => {
     const { data, error } = await supabase.auth.admin.listUsers();
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(data.users);
+});
+
+app.delete('/api/admin/users/:id', verifySupervisor, async (req, res) => {
+    const { error } = await supabase.auth.admin.deleteUser(req.params.id);
+    if (error) return res.status(500).json({ error: error.message });
+    res.json({ message: "Citizen deleted." });
+});
+
+app.patch('/api/admin/users/:id/suspend', verifySupervisor, async (req, res) => {
+    const { error } = await supabase.auth.admin.updateUserById(req.params.id, { user_metadata: { account_status: 'suspended' } });
+    if (error) return res.status(500).json({ error: error.message });
+    res.json({ message: "Citizen suspended." });
+});
+
+// Admin updating a user's details
+app.patch('/api/admin/users/:id/update', verifySupervisor, async (req, res) => {
+    const userId = req.params.id;
+    const { newName, newIdNumber } = req.body;
+
+    const { data, error } = await supabase.auth.admin.updateUserById(userId, {
+        user_metadata: { full_name: newName, id_number: newIdNumber }
+    });
     
     if (error) return res.status(500).json({ error: error.message });
-    res.json({ users: data.users, message: "Welcome to the Admin Dashboard" });
+    res.json({ message: "Citizen information updated successfully." });
 });
 
-// The South African ID Luhn Check Algorithm
-const validateSAID = (id) => {
-    if (!/^\d{13}$/.test(id)) return false;
-    let total = 0;
-    for (let i = 0; i < 12; i++) {
-        let digit = parseInt(id[i], 10);
-        if (i % 2 !== 0) {
-            digit *= 2;
-            if (digit > 9) digit -= 9;
-        }
-        total += digit;
-    }
-    const checkDigit = (10 - (total % 10)) % 10;
-    return checkDigit === parseInt(id[12], 10);
-};
+// ─── USER SELF-DELETION ROUTE ─────────────────────────────────────────────────
+app.post('/api/user/delete', async (req, res) => {
+    const { email } = req.body;
 
-// Secure Registration Route
-app.post('/api/register', async (req, res) => {
-    const { email, password, fullName, idNumber } = req.body;
+    // Find the user by email first
+    const { data: users, error: searchError } = await supabase.auth.admin.listUsers();
+    if (searchError) return res.status(500).json({ error: "Failed to search users" });
 
-    // 1. Run the strict server-side validation
-    if (!validateSAID(idNumber)) {
-        return res.status(400).json({ error: "Invalid South African ID Number" });
-    }
+    const userToDelete = users.users.find(u => u.email === email);
+    if (!userToDelete) return res.status(404).json({ error: "User not found" });
 
-    // 2. If valid, process the registration with Supabase
-    const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-                full_name: fullName,
-                id_number: idNumber,
-                role: 'citizen' // Default role
-            }
-        }
-    });
+    // Delete them from Supabase
+    const { error: deleteError } = await supabase.auth.admin.deleteUser(userToDelete.id);
+    if (deleteError) return res.status(500).json({ error: "Failed to delete user" });
 
-    if (error) return res.status(400).json({ error: error.message });
-    res.status(200).json({ message: "Registration successful", user: data.user });
+    res.status(200).json({ message: "Account deleted successfully" });
 });
 
-// ─── START SERVER ─────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-    console.log(`CivicSync server running at http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`CivicSync backend active on port ${PORT}`));

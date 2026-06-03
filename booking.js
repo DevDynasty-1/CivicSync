@@ -1,48 +1,38 @@
-
 // ─── EMAILJS CONFIGURATION ──────────────────────────────────────────────────────
-// SETUP INSTRUCTIONS:
-// 1. Go to https://www.emailjs.com and create a free account
-// 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
-// 3. Create an Email Template using the HTML in EMAIL_TEMPLATE_GUIDE below → copy Template ID
-// 4. Go to Account → API Keys → copy your Public Key
-// 5. Replace the three values below with yours
-
-// ─── HOME AFFAIRS OFFICES (South Africa) ──────────────────────────────────────
-//>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
 const HOME_AFFAIRS_OFFICES = [
   // Gauteng
-  { id: 'sandton',        name: 'Sandton Home Affairs',                 address: 'Sandton City, Cnr Rivonia Rd & 5th St, Sandton',            lat: -26.1076, lng: 28.0567, province: 'Gauteng' },
-  { id: 'randburg',       name: 'Randburg Home Affairs',                address: '120 Bram Fischer Dr, Ferndale, Randburg',                    lat: -26.0936, lng: 27.9964, province: 'Gauteng' },
-  { id: 'jhb-central',   name: 'Johannesburg Central Home Affairs',     address: 'Harrison St, Johannesburg CBD',                             lat: -26.2041, lng: 28.0473, province: 'Gauteng' },
-  { id: 'pretoria-cbd',  name: 'Pretoria Main Home Affairs',            address: '270 Pretorius St, Pretoria CBD',                             lat: -25.7461, lng: 28.1881, province: 'Gauteng' },
-  { id: 'soshanguve',    name: 'Soshanguve Home Affairs',               address: 'Block H, Soshanguve, Pretoria',                             lat: -25.5221, lng: 28.0847, province: 'Gauteng' },
-  { id: 'tembisa',       name: 'Tembisa Home Affairs',                  address: 'Tembisa Shopping Centre, Tembisa',                          lat: -25.9988, lng: 28.2289, province: 'Gauteng' },
-  { id: 'soweto',        name: 'Soweto Home Affairs',                   address: 'Jabulani Mall, Soweto',                                     lat: -26.2648, lng: 27.8586, province: 'Gauteng' },
-  { id: 'germiston',     name: 'Germiston Home Affairs',                address: '48 Joubert St, Germiston',                                  lat: -26.2224, lng: 28.1668, province: 'Gauteng' },
-  { id: 'centurion',     name: 'Centurion Home Affairs',                address: 'Centurion Mall, Centurion',                                 lat: -25.8604, lng: 28.1887, province: 'Gauteng' },
-  { id: 'roodepoort',    name: 'Roodepoort Home Affairs',               address: '52 Ontdekkers Rd, Roodepoort',                              lat: -26.1625, lng: 27.8695, province: 'Gauteng' },
+  { id: 'sandton',    name: 'Sandton Home Affairs',                address: 'Sandton City, Cnr Rivonia Rd & 5th St, Sandton',   lat: -26.1076, lng: 28.0567, province: 'Gauteng' },
+  { id: 'randburg',   name: 'Randburg Home Affairs',               address: '120 Bram Fischer Dr, Ferndale, Randburg',          lat: -26.0936, lng: 27.9964, province: 'Gauteng' },
+  { id: 'jhb-central',name: 'Johannesburg Central Home Affairs',   address: 'Harrison St, Johannesburg CBD',                    lat: -26.2041, lng: 28.0473, province: 'Gauteng' },
+  { id: 'pretoria-cbd',name: 'Pretoria Main Home Affairs',         address: '270 Pretorius St, Pretoria CBD',                   lat: -25.7461, lng: 28.1881, province: 'Gauteng' },
+  { id: 'soshanguve', name: 'Soshanguve Home Affairs',             address: 'Block H, Soshanguve, Pretoria',                    lat: -25.5221, lng: 28.0847, province: 'Gauteng' },
+  { id: 'tembisa',    name: 'Tembisa Home Affairs',                address: 'Tembisa Shopping Centre, Tembisa',                 lat: -25.9988, lng: 28.2289, province: 'Gauteng' },
+  { id: 'soweto',     name: 'Soweto Home Affairs',                 address: 'Jabulani Mall, Soweto',                            lat: -26.2648, lng: 27.8586, province: 'Gauteng' },
+  { id: 'germiston',  name: 'Germiston Home Affairs',              address: '48 Joubert St, Germiston',                         lat: -26.2224, lng: 28.1668, province: 'Gauteng' },
+  { id: 'centurion',  name: 'Centurion Home Affairs',              address: 'Centurion Mall, Centurion',                        lat: -25.8604, lng: 28.1887, province: 'Gauteng' },
+  { id: 'roodepoort', name: 'Roodepoort Home Affairs',             address: '52 Ontdekkers Rd, Roodepoort',                     lat: -26.1625, lng: 27.8695, province: 'Gauteng' },
   // Western Cape
-  { id: 'cpt-cbd',       name: 'Cape Town Civic Centre Home Affairs',   address: '12 Hertzog Blvd, Cape Town CBD',                            lat: -33.9258, lng: 18.4232, province: 'Western Cape' },
-  { id: 'bellville',     name: 'Bellville Home Affairs',                address: 'Bellville Civic Centre, Bellville',                         lat: -33.8997, lng: 18.6285, province: 'Western Cape' },
-  { id: 'mitchells-plain', name: "Mitchell's Plain Home Affairs",       address: "Mitchell's Plain Town Centre",                              lat: -34.0417, lng: 18.6192, province: 'Western Cape' },
-  { id: 'george',        name: 'George Home Affairs',                   address: '79 Market St, George',                                     lat: -33.9646, lng: 22.4609, province: 'Western Cape' },
+  { id: 'cpt-cbd',       name: 'Cape Town Civic Centre',           address: '12 Hertzog Blvd, Cape Town CBD',                   lat: -33.9258, lng: 18.4232, province: 'Western Cape' },
+  { id: 'bellville',     name: 'Bellville Home Affairs',           address: 'Bellville Civic Centre, Bellville',                lat: -33.8997, lng: 18.6285, province: 'Western Cape' },
+  { id: 'mitchells-plain',name: "Mitchell's Plain Home Affairs",   address: "Mitchell's Plain Town Centre",                     lat: -34.0417, lng: 18.6192, province: 'Western Cape' },
+  { id: 'george',        name: 'George Home Affairs',              address: '79 Market St, George',                             lat: -33.9646, lng: 22.4609, province: 'Western Cape' },
   // KwaZulu-Natal
-  { id: 'durban-cbd',    name: 'Durban Central Home Affairs',           address: '69 Monty Naicker St, Durban CBD',                           lat: -29.8579, lng: 31.0219, province: 'KwaZulu-Natal' },
-  { id: 'umlazi',        name: 'Umlazi Home Affairs',                   address: 'Umlazi Mega City, Umlazi',                                  lat: -29.9755, lng: 30.8888, province: 'KwaZulu-Natal' },
-  { id: 'pmb',           name: 'Pietermaritzburg Home Affairs',         address: '265 Church St, Pietermaritzburg',                           lat: -29.6006, lng: 30.3794, province: 'KwaZulu-Natal' },
+  { id: 'durban-cbd', name: 'Durban Central Home Affairs',         address: '69 Monty Naicker St, Durban CBD',                  lat: -29.8579, lng: 31.0219, province: 'KwaZulu-Natal' },
+  { id: 'umlazi',     name: 'Umlazi Home Affairs',                 address: 'Umlazi Mega City, Umlazi',                         lat: -29.9755, lng: 30.8888, province: 'KwaZulu-Natal' },
+  { id: 'pmb',        name: 'Pietermaritzburg Home Affairs',       address: '265 Church St, Pietermaritzburg',                  lat: -29.6006, lng: 30.3794, province: 'KwaZulu-Natal' },
   // Eastern Cape
-  { id: 'pe-central',   name: 'Gqeberha (PE) Central Home Affairs',    address: '157 Govan Mbeki Ave, Gqeberha',                             lat: -33.9608, lng: 25.6022, province: 'Eastern Cape' },
-  { id: 'east-london',  name: 'East London Home Affairs',               address: '3 St Lukes Rd, East London',                                lat: -32.9854, lng: 27.8961, province: 'Eastern Cape' },
+  { id: 'pe-central',  name: 'Gqeberha (PE) Central Home Affairs', address: '157 Govan Mbeki Ave, Gqeberha',                    lat: -33.9608, lng: 25.6022, province: 'Eastern Cape' },
+  { id: 'east-london', name: 'East London Home Affairs',           address: '3 St Lukes Rd, East London',                       lat: -32.9854, lng: 27.8961, province: 'Eastern Cape' },
   // Free State
-  { id: 'bloem',        name: 'Bloemfontein Home Affairs',              address: 'Corner Charlotte Maxeke & St Andrews St, Bloemfontein',     lat: -29.1210, lng: 26.2071, province: 'Free State' },
+  { id: 'bloem',       name: 'Bloemfontein Home Affairs',          address: 'Corner Charlotte Maxeke & St Andrews St, BFN',     lat: -29.1210, lng: 26.2071, province: 'Free State' },
   // Limpopo
-  { id: 'polokwane',    name: 'Polokwane Home Affairs',                 address: '25 Rabe St, Polokwane',                                     lat: -23.9045, lng: 29.4689, province: 'Limpopo' },
+  { id: 'polokwane',   name: 'Polokwane Home Affairs',             address: '25 Rabe St, Polokwane',                            lat: -23.9045, lng: 29.4689, province: 'Limpopo' },
   // Mpumalanga
-  { id: 'nelspruit',   name: 'Mbombela (Nelspruit) Home Affairs',       address: '28 Bell St, Mbombela',                                      lat: -25.4753, lng: 30.9694, province: 'Mpumalanga' },
+  { id: 'nelspruit',   name: 'Mbombela (Nelspruit) Home Affairs',  address: '28 Bell St, Mbombela',                             lat: -25.4753, lng: 30.9694, province: 'Mpumalanga' },
   // North West
-  { id: 'rustenburg',  name: 'Rustenburg Home Affairs',                 address: '26 Fatima Bhayat St, Rustenburg',                           lat: -25.6675, lng: 27.2422, province: 'North West' },
+  { id: 'rustenburg',  name: 'Rustenburg Home Affairs',            address: '26 Fatima Bhayat St, Rustenburg',                  lat: -25.6675, lng: 27.2422, province: 'North West' },
   // Northern Cape
-  { id: 'kimberley',   name: 'Kimberley Home Affairs',                  address: 'Du Toitspan Rd, Kimberley',                                 lat: -28.7282, lng: 24.7499, province: 'Northern Cape' },
+  { id: 'kimberley',   name: 'Kimberley Home Affairs',             address: 'Du Toitspan Rd, Kimberley',                        lat: -28.7282, lng: 24.7499, province: 'Northern Cape' },
 ];
 
 let userLat = null;
@@ -51,9 +41,7 @@ let selectedOffice = null;
 let map = null;
 let markers = {};
 let userMarker = null;
-let filteredOffices = [...HOME_AFFAIRS_OFFICES];
 
-// Calendar state
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const BOOKED_DATES = new Set(['2025-4-3','2025-4-9','2025-4-16','2025-4-22']);
 const BOOKED_SLOTS = { '2025-4-7': new Set(['10:00 AM']), '2025-4-14': new Set(['10:00 AM','10:30 AM']) };
@@ -88,14 +76,12 @@ function getOfficesWithDistance() {
 
 function initMap() {
   map = L.map('ha-map', { zoomControl: true }).setView([-28.5, 25.5], 5);
-
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors © CARTO',
+    attribution: '© OpenStreetMap contributors',
     subdomains: 'abcd',
     maxZoom: 19
   }).addTo(map);
 
-  // Custom marker icons
   const defaultIcon = L.divIcon({
     html: `<div class="map-marker-icon">🏛️</div>`,
     className: '',
@@ -114,7 +100,6 @@ function initMap() {
           <small style="color:#94a3b8">${office.province}</small>
         </div>
       `);
-
     marker.on('click', () => selectOfficeFromMap(office));
     markers[office.id] = marker;
   });
@@ -126,9 +111,7 @@ function renderOfficeList() {
   const offices = getOfficesWithDistance();
   const query = document.getElementById('office-search').value.toLowerCase();
   const filtered = query ? offices.filter(o =>
-    o.name.toLowerCase().includes(query) ||
-    o.address.toLowerCase().includes(query) ||
-    o.province.toLowerCase().includes(query)
+    o.name.toLowerCase().includes(query) || o.address.toLowerCase().includes(query) || o.province.toLowerCase().includes(query)
   ) : offices;
 
   const list = document.getElementById('office-list');
@@ -144,22 +127,12 @@ function renderOfficeList() {
     item.className = 'office-list-item' + (selectedOffice?.id === office.id ? ' active' : '');
     item.dataset.id = office.id;
 
-    const distHtml = office.distKm !== null
-      ? `<span class="list-distance">${formatDistance(office.distKm)}</span>`
-      : '';
-    const nearestBadge = (i === 0 && office.distKm !== null && userLat !== null)
-      ? `<span class="nearest-badge">Nearest</span>`
-      : '';
+    const distHtml = office.distKm !== null ? `<span class="list-distance">${formatDistance(office.distKm)}</span>` : '';
+    const nearestBadge = (i === 0 && office.distKm !== null && userLat !== null) ? `<span class="nearest-badge">Nearest</span>` : '';
 
     item.innerHTML = `
-      <div class="list-item-header">
-        <span class="list-item-name">${office.name}</span>
-        ${nearestBadge}
-      </div>
-      <div class="list-item-sub">
-        <span class="list-item-province">${office.province}</span>
-        ${distHtml}
-      </div>
+      <div class="list-item-header"><span class="list-item-name">${office.name}</span>${nearestBadge}</div>
+      <div class="list-item-sub"><span class="list-item-province">${office.province}</span>${distHtml}</div>
     `;
 
     item.addEventListener('click', () => selectOfficeFromList(office));
@@ -167,12 +140,7 @@ function renderOfficeList() {
   });
 }
 
-function selectOfficeFromMap(office) {
-  selectedOffice = office;
-  showSelectedOfficeCard(office);
-  renderOfficeList(); // update active state
-}
-
+function selectOfficeFromMap(office) { selectedOffice = office; showSelectedOfficeCard(office); renderOfficeList(); }
 function selectOfficeFromList(office) {
   selectedOffice = office;
   map.setView([office.lat, office.lng], 13, { animate: true });
@@ -184,17 +152,10 @@ function selectOfficeFromList(office) {
 function showSelectedOfficeCard(office) {
   const card = document.getElementById('selected-office-card');
   card.classList.remove('hidden');
-
   document.getElementById('card-name').textContent = office.name;
   document.getElementById('card-address').textContent = office.address;
-
   const distEl = document.getElementById('card-distance');
-  if (userLat !== null) {
-    const km = haversineKm(userLat, userLng, office.lat, office.lng);
-    distEl.textContent = `📍 ${formatDistance(km)}`;
-  } else {
-    distEl.textContent = '📍 Enable location for distance';
-  }
+  distEl.textContent = userLat !== null ? `📍 ${formatDistance(haversineKm(userLat, userLng, office.lat, office.lng))}` : '📍 Enable location for distance';
 }
 
 document.getElementById('btn-locate-me').addEventListener('click', () => {
@@ -202,46 +163,20 @@ document.getElementById('btn-locate-me').addEventListener('click', () => {
   btn.textContent = 'Locating...';
   btn.disabled = true;
 
-  if (!navigator.geolocation) {
-    showToast('Geolocation is not supported by your browser.', 'error');
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg> Use My Location`;
-    return;
-  }
+  if (!navigator.geolocation) return showToast('Geolocation is not supported.', 'error');
 
   navigator.geolocation.getCurrentPosition(
     (pos) => {
-      userLat = pos.coords.latitude;
-      userLng = pos.coords.longitude;
-
+      userLat = pos.coords.latitude; userLng = pos.coords.longitude;
       if (userMarker) map.removeLayer(userMarker);
-      userMarker = L.circleMarker([userLat, userLng], {
-        radius: 10,
-        fillColor: '#38bdf8',
-        color: '#fff',
-        weight: 3,
-        fillOpacity: 0.9
-      }).addTo(map).bindPopup('📍 You are here');
-
+      userMarker = L.circleMarker([userLat, userLng], { radius: 10, fillColor: '#38bdf8', color: '#fff', weight: 3, fillOpacity: 0.9 }).addTo(map).bindPopup('📍 You are here');
       map.setView([userLat, userLng], 11, { animate: true });
-
-      // Sort and show nearest
       const nearest = getOfficesWithDistance()[0];
       renderOfficeList();
-
-      btn.disabled = false;
-      btn.innerHTML = `✓ Location Found`;
-      btn.style.background = 'rgba(34,197,94,0.15)';
-      btn.style.borderColor = '#22c55e';
-      btn.style.color = '#22c55e';
-
-      showToast(`Location found! Nearest office: ${nearest.name} (${formatDistance(nearest.distKm)})`, 'success');
+      btn.disabled = false; btn.innerHTML = `✓ Location Found`; btn.style.color = '#22c55e';
+      showToast(`Location found! Nearest: ${nearest.name}`, 'success');
     },
-    (err) => {
-      showToast('Could not get your location. Please allow location access.', 'error');
-      btn.disabled = false;
-      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg> Use My Location`;
-    },
+    (err) => { showToast('Could not get location.', 'error'); btn.disabled = false; btn.textContent = 'Use My Location'; },
     { timeout: 10000 }
   );
 });
@@ -250,61 +185,13 @@ document.getElementById('office-search').addEventListener('input', renderOfficeL
 
 document.getElementById('btn-select-office').addEventListener('click', () => {
   if (!selectedOffice) return;
-
   document.getElementById('location').value = selectedOffice.id;
-
   const step2 = document.getElementById('booking-step2');
   step2.classList.remove('hidden');
   step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
   showToast(`✓ ${selectedOffice.name} selected`, 'success');
   buildCalendar(currentYear, currentMonth);
   buildTimeSlots(null);
-});
-
-document.getElementById('btn-get-directions').addEventListener('click', () => {
-  if (!selectedOffice) return;
-  openDirectionsModal(selectedOffice);
-});
-
-function openDirectionsModal(office) {
-  const modal = document.getElementById('directions-modal');
-  modal.classList.remove('hidden');
-
-  document.getElementById('directions-to-name').textContent = office.name + ' — ' + office.address;
-
-  const distNote = document.getElementById('directions-distance-note');
-  if (userLat !== null) {
-    const km = haversineKm(userLat, userLng, office.lat, office.lng);
-    distNote.textContent = `Approx. ${formatDistance(km)} from your current location`;
-  } else {
-    distNote.textContent = 'Enable location for distance estimate';
-  }
-
-  const destQuery = encodeURIComponent(`${office.lat},${office.lng}`);
-  const destName  = encodeURIComponent(office.name);
-
-  const origin = (userLat !== null) ? `${userLat},${userLng}` : '';
-  const originParam = origin ? `&origin=${encodeURIComponent(origin)}` : '';
-
-  document.getElementById('dir-google').href =
-    `https://www.google.com/maps/dir/${origin ? encodeURIComponent(origin) + '/' : ''}${destQuery}`;
-
-  document.getElementById('dir-waze').href =
-    `https://waze.com/ul?ll=${office.lat},${office.lng}&navigate=yes`;
-
-  document.getElementById('dir-apple').href =
-    `https://maps.apple.com/?daddr=${destQuery}&q=${destName}`;
-}
-
-document.getElementById('close-directions').addEventListener('click', () => {
-  document.getElementById('directions-modal').classList.add('hidden');
-});
-
-document.getElementById('directions-modal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('directions-modal')) {
-    document.getElementById('directions-modal').classList.add('hidden');
-  }
 });
 
 function buildCalendar(year, month) {
@@ -313,9 +200,9 @@ function buildCalendar(year, month) {
   monthYearEl.textContent = `${MONTHS[month]} ${year}`;
   datesGridEl.innerHTML = '';
 
-  const firstDay    = new Date(year, month, 1).getDay();
+  const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const today       = new Date(); today.setHours(0,0,0,0);
+  const today = new Date(); today.setHours(0,0,0,0);
 
   for (let i = 0; i < firstDay; i++) {
     const empty = document.createElement('span');
@@ -325,10 +212,7 @@ function buildCalendar(year, month) {
 
   for (let d = 1; d <= daysInMonth; d++) {
     const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.classList.add('date');
-    btn.textContent = d;
-
+    btn.type = 'button'; btn.classList.add('date'); btn.textContent = d;
     const dateObj = new Date(year, month, d);
     const dateKey = `${year}-${month + 1}-${d}`;
     const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
@@ -336,10 +220,7 @@ function buildCalendar(year, month) {
     const isBooked  = BOOKED_DATES.has(dateKey);
 
     if (isPast || isWeekend || isBooked) {
-      btn.disabled = true;
-      btn.style.opacity = '0.3';
-      btn.style.cursor = 'not-allowed';
-      if (isBooked) btn.title = 'Fully booked';
+      btn.disabled = true; btn.style.opacity = '0.3'; btn.style.cursor = 'not-allowed';
     } else {
       btn.addEventListener('click', () => selectDate(year, month + 1, d, btn));
     }
@@ -347,7 +228,6 @@ function buildCalendar(year, month) {
     if (selectedDate && selectedDate.year === year && selectedDate.month === month + 1 && selectedDate.day === d) {
       btn.classList.add('selected');
     }
-
     datesGridEl.appendChild(btn);
   }
 }
@@ -372,16 +252,13 @@ function buildTimeSlots(dateKey) {
 
     const id = 'slot-' + time.replace(/[: ]/g, '-');
     const radio = document.createElement('input');
-    radio.type = 'radio'; radio.name = 'timeSlot'; radio.value = time;
-    radio.id = id; radio.classList.add('visually-hidden');
+    radio.type = 'radio'; radio.name = 'timeSlot'; radio.value = time; radio.id = id; radio.classList.add('visually-hidden');
     if (isSlotBooked) radio.disabled = true;
 
     const label = document.createElement('label');
-    label.htmlFor = id; label.classList.add('time-slot-label');
-    label.textContent = time;
+    label.htmlFor = id; label.classList.add('time-slot-label'); label.textContent = time;
     if (isSlotBooked) {
-      label.style.opacity = '0.35'; label.style.cursor = 'not-allowed';
-      label.title = 'Fully booked';
+      label.style.opacity = '0.35'; label.style.cursor = 'not-allowed'; label.title = 'Fully booked';
     } else {
       radio.addEventListener('change', () => { selectedTime = time; updateConfirmState(); });
     }
@@ -392,14 +269,10 @@ function buildTimeSlots(dateKey) {
 }
 
 document.querySelector('[aria-label="Previous Month"]').addEventListener('click', () => {
-  currentMonth--;
-  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-  buildCalendar(currentYear, currentMonth);
+  currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } buildCalendar(currentYear, currentMonth);
 });
 document.querySelector('[aria-label="Next Month"]').addEventListener('click', () => {
-  currentMonth++;
-  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-  buildCalendar(currentYear, currentMonth);
+  currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } buildCalendar(currentYear, currentMonth);
 });
 
 function updateConfirmState() {
@@ -413,32 +286,24 @@ function updateConfirmState() {
   btn.style.cursor  = ready ? 'pointer' : 'not-allowed';
 }
 
-// Also update confirm state when name/email change
 document.getElementById('booking-name').addEventListener('input', updateConfirmState);
 document.getElementById('booking-email').addEventListener('input', updateConfirmState);
 
+// ─── THE NEW FULL-STACK SUBMISSION LOGIC ──────────────────────────────────────
 document.getElementById('booking-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const userName  = document.getElementById('booking-name').value.trim();
   const userEmail = document.getElementById('booking-email').value.trim();
 
-  if (!selectedDate || !selectedTime || !selectedOffice) {
-    showToast('Please select a date and time slot before confirming.', 'error');
-    return;
-  }
-  if (!userName || !userEmail) {
-    showToast('Please enter your name and email address.', 'error');
-    return;
-  }
+  if (!selectedDate || !selectedTime || !selectedOffice) return showToast('Please select a date and time slot.', 'error');
+  if (!userName || !userEmail) return showToast('Please enter your name and email address.', 'error');
 
   const bookingDetails = {
     name:     userName,
     email:    userEmail,
     office:   selectedOffice.name,
     address:  selectedOffice.address,
-    lat:      selectedOffice.lat,
-    lng:      selectedOffice.lng,
     date:     `${selectedDate.day} ${MONTHS[selectedDate.month - 1]} ${selectedDate.year}`,
     time:     selectedTime,
     ref:      generateRef(),
@@ -446,56 +311,56 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
     distKm:   (userLat !== null) ? haversineKm(userLat, userLng, selectedOffice.lat, selectedOffice.lng) : null,
   };
 
-  sessionStorage.setItem('civicsync_booking', JSON.stringify(bookingDetails));
-  sessionStorage.setItem('civicsync_booking_completed', 'true');
-
   const btn = document.getElementById('btn-confirm-booking');
   btn.disabled = true;
-  btn.textContent = 'Sending confirmation…';
+  btn.textContent = 'Saving Booking to Database…';
 
-  // Generate QR code as data URL, then show modal and send email
-  generateQRDataURL(bookingDetails).then(async (qrDataURL) => {
-    showToast(`Booking confirmed! Sending confirmation to ${userEmail}…`, 'success');
-    showConfirmationModal(bookingDetails, qrDataURL);
-    await sendConfirmationEmail(bookingDetails, qrDataURL);
-  }).catch(() => {
-    showToast('Booking confirmed! (Email could not be sent — check your EmailJS config)', 'error');
-    showConfirmationModal(bookingDetails, null);
-  });
+  try {
+      // 1. SAVE TO SUPABASE VIA BACKEND
+      const dbResponse = await fetch('http://localhost:3000/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              reference: bookingDetails.ref,
+              citizen_name: bookingDetails.name,
+              citizen_email: bookingDetails.email,
+              office: bookingDetails.office,
+              date: bookingDetails.date,
+              time: bookingDetails.time
+          })
+      });
+
+      if (!dbResponse.ok) throw new Error("Failed to save to database");
+
+      // 2. GENERATE QR CODE AND SEND EMAIL
+      btn.textContent = 'Sending Confirmation Email…';
+      const qrDataURL = await generateQRDataURL(bookingDetails);
+      
+      showToast(`Booking saved! Sending confirmation to ${userEmail}…`, 'success');
+      showConfirmationModal(bookingDetails, qrDataURL);
+      await sendConfirmationEmail(bookingDetails, qrDataURL);
+
+  } catch (error) {
+      console.error(error);
+      showToast('Error saving booking. Please try again.', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Confirm Booking';
+  }
 });
 
 function generateQRDataURL(d) {
   return new Promise((resolve, reject) => {
-    const qrPayload = [
-      `CivicSync Booking`,
-      `Ref: ${d.ref}`,
-      `Name: ${d.name}`,
-      `Office: ${d.office}`,
-      `Address: ${d.address}`,
-      `Date: ${d.date}`,
-      `Time: ${d.time}`,
-    ].join('\n');
-
+    const qrPayload = `CivicSync Booking\nRef: ${d.ref}\nName: ${d.name}\nOffice: ${d.office}\nDate: ${d.date}\nTime: ${d.time}`;
     const container = document.createElement('div');
     container.style.cssText = 'position:absolute;left:-9999px;top:-9999px;background:white;padding:8px;';
     document.body.appendChild(container);
 
     try {
-      new QRCode(container, {
-        text:         qrPayload,
-        width:        280,
-        height:       280,
-        colorDark:    '#0f172a',
-        colorLight:   '#ffffff',
-        correctLevel: QRCode.CorrectLevel.H,
-      });
+      new QRCode(container, { text: qrPayload, width: 280, height: 280, colorDark: '#0f172a', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
       setTimeout(() => {
         const canvas = container.querySelector('canvas');
-        if (canvas) {
-          resolve(canvas.toDataURL('image/png'));
-        } else {
-          reject(new Error('QR canvas not found'));
-        }
+        if (canvas) resolve(canvas.toDataURL('image/png'));
+        else reject(new Error('QR canvas not found'));
         document.body.removeChild(container);
       }, 400);
     } catch (err) {
@@ -506,117 +371,56 @@ function generateQRDataURL(d) {
 }
 
 async function sendConfirmationEmail(d, qrDataURL) {
-    try {
-        const response = await fetch('/api/send-confirmation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                userEmail:    d.email,
-                userName:     d.name,
-                bookingRef:   d.ref,
-                office:       d.office,
-                address:      d.address,
-                date:         d.date,
-                time:         d.time,
-                bookedAt:     d.bookedAt,
-                mapsLink:     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.address)}`,
-                qrCodeBase64: qrDataURL || '',
-            })
-        });
+  try {
+      const response = await fetch('http://localhost:3000/api/send-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              userEmail:    d.email,
+              userName:     d.name,
+              bookingRef:   d.ref,
+              office:       d.office,
+              address:      d.address,
+              date:         d.date,
+              time:         d.time,
+              bookedAt:     d.bookedAt,
+              mapsLink:     `https://www.google.com/maps/search/?api=1&query=$${encodeURIComponent(d.address)}`,
+              qrCodeBase64: qrDataURL || '',
+          })
+      });
 
-        if (response.ok) {
-            showToast(`✓ Confirmation email sent to ${d.email}`, 'success');
-        } else {
-            showToast('Email delivery failed — check your server.', 'error');
-        }
-    } catch (err) {
-        console.error('Email error:', err);
-        showToast('Could not reach the server to send email.', 'error');
-    }
+      if (response.ok) showToast(`✓ Confirmation email sent to ${d.email}`, 'success');
+      else showToast('Email delivery failed — check your server.', 'error');
+  } catch (err) {
+      console.error('Email error:', err);
+      showToast('Could not reach the server to send email.', 'error');
+  }
 }
 
 function showConfirmationModal(d, qrDataURL) {
-  const distLine = d.distKm !== null
-    ? `<tr><td style="color:#94a3b8;padding:7px 0 7px;width:38%;">Distance</td><td style="font-weight:600;">${formatDistance(d.distKm)}</td></tr>`
-    : '';
-
-  const qrSection = qrDataURL
-    ? `<div style="text-align:center;margin:24px 0 4px;">
-         <p style="color:#64748b;font-size:0.75rem;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">Scan at the office</p>
-         <div style="display:inline-block;background:white;border-radius:14px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
-           <img src="${qrDataURL}" width="164" height="164" alt="Booking QR Code" style="display:block;" />
-         </div>
-         <p style="color:#64748b;font-size:0.72rem;margin:10px 0 0;">Present this QR code when you arrive — staff will scan it at the counter</p>
-       </div>`
-    : `<p style="color:#f87171;font-size:0.82rem;text-align:center;margin:16px 0 0;">Configure EmailJS to enable QR codes</p>`;
-
   const overlay = document.createElement('div');
   overlay.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.82);display:flex;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(6px);padding:16px;`;
   overlay.innerHTML = `
-    <div style="background:linear-gradient(160deg,#1e293b,#0f172a);border:1px solid rgba(56,189,248,0.22);border-radius:24px;padding:36px 32px;max-width:460px;width:100%;text-align:center;color:white;box-shadow:0 24px 64px rgba(0,0,0,0.6);max-height:92vh;overflow-y:auto;">
-      <div style="width:56px;height:56px;background:rgba(56,189,248,0.12);border:2px solid rgba(56,189,248,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 18px;">✓</div>
+    <div style="background:#1e293b;border:1px solid rgba(56,189,248,0.22);border-radius:24px;padding:36px 32px;max-width:460px;width:100%;text-align:center;color:white;box-shadow:0 24px 64px rgba(0,0,0,0.6);">
       <h2 style="color:#38bdf8;margin:0 0 6px;font-size:1.45rem;">Booking Confirmed!</h2>
-      <p style="color:#94a3b8;margin:0 0 22px;font-size:0.88rem;">Confirmation sent to <strong style="color:white;">${d.email}</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;text-align:left;font-size:0.87rem;">
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-          <td style="color:#94a3b8;padding:7px 0;width:38%;">Reference</td>
-          <td><strong style="color:#fbbf24;font-size:1rem;letter-spacing:0.06em;">${d.ref}</strong></td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-          <td style="color:#94a3b8;padding:7px 0;">Name</td>
-          <td style="font-weight:600;">${d.name}</td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-          <td style="color:#94a3b8;padding:7px 0;">Office</td>
-          <td style="font-weight:600;font-size:0.85rem;">${d.office}</td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-          <td style="color:#94a3b8;padding:7px 0;">Address</td>
-          <td style="font-size:0.8rem;color:#cbd5e1;">${d.address}</td>
-        </tr>
-        ${distLine}
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.07);">
-          <td style="color:#94a3b8;padding:7px 0;">Date</td>
-          <td style="font-weight:600;">${d.date}</td>
-        </tr>
-        <tr>
-          <td style="color:#94a3b8;padding:7px 0;">Time</td>
-          <td style="font-weight:600;">${d.time}</td>
-        </tr>
-      </table>
-
-      ${qrSection}
-
-      <p style="color:#475569;font-size:0.76rem;margin:20px 0 22px;line-height:1.6;">
-        Bring this QR code (printed or on phone) + all required documents to your appointment. Arrive 10 minutes early.
-      </p>
-      <button id="cs-modal-done-btn" style="background:#38bdf8;color:#0f172a;border:none;padding:13px 32px;border-radius:12px;font-weight:700;font-size:0.95rem;cursor:pointer;width:100%;">Done</button>
+      <p style="color:#94a3b8;margin:0 0 22px;font-size:0.88rem;">Reference: <strong style="color:#fbbf24;">${d.ref}</strong></p>
+      <div style="background:white;padding:14px;border-radius:14px;display:inline-block;margin-bottom:20px;">
+        <img src="${qrDataURL}" width="164" height="164" alt="QR Code" />
+      </div>
+      <button id="cs-modal-done-btn" style="background:#38bdf8;color:#0f172a;border:none;padding:13px 32px;border-radius:12px;font-weight:700;cursor:pointer;width:100%;">Done</button>
     </div>`;
   document.body.appendChild(overlay);
-  document.getElementById('cs-modal-done-btn').addEventListener('click', () => {
-    window.location.href = 'dashboard.html';
-  });
+  document.getElementById('cs-modal-done-btn').addEventListener('click', () => window.location.href = 'dashboard.html');
 }
-//fixed
-function generateRef() {
-  return 'CS-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-}
+
+function generateRef() { return 'CS-' + Math.random().toString(36).substring(2, 7).toUpperCase(); }
 
 function showToast(message, type = 'success') {
   const existing = document.getElementById('cs-toast');
   if (existing) existing.remove();
   const toast = document.createElement('div');
-  toast.id = 'cs-toast';
-  toast.textContent = message;
-  toast.style.cssText = `
-    position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
-    background:${type === 'success' ? '#38bdf8' : '#f87171'};
-    color:${type === 'success' ? '#0f172a' : '#fff'};
-    padding:14px 28px;border-radius:12px;font-weight:600;font-size:0.95rem;
-    z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);
-    transition:opacity 0.4s ease;white-space:nowrap;max-width:90vw;text-align:center;
-  `;
+  toast.id = 'cs-toast'; toast.textContent = message;
+  toast.style.cssText = `position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:${type === 'success' ? '#38bdf8' : '#f87171'};color:${type === 'success' ? '#0f172a' : '#fff'};padding:14px 28px;border-radius:12px;font-weight:600;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,0.3);transition:opacity 0.4s ease;`;
   document.body.appendChild(toast);
   setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 4000);
 }

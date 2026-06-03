@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicSync | Admin Dashboard</title>
+    <link rel="stylesheet" href="index.css"> <!-- Your global styles -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-brand">
+            <h2>🏛️ CivicSync</h2>
+            <span class="badge-admin">Admin Portal</span>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-btn active" onclick="switchTab('bookings')">📅 Today's Bookings</button>
+            <button class="nav-btn" onclick="switchTab('citizens')">👥 Manage Citizens</button>
+            <a href="/dashboard.html" class="nav-link">⬅ Back to App</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1>Dashboard Overview</h1>
+            <div class="header-actions">
+                <select id="branch-filter" class="admin-select">
+                    <option value="all">All Branches</option>
+                    <option value="Sandton Home Affairs">Sandton</option>
+                    <option value="Randburg Home Affairs">Randburg</option>
+                </select>
+                <button id="theme-toggle" class="btn-secondary">🌓 Toggle Theme</button>
+            </div>
+        </header>
+
+        <!-- Bookings Tab -->
+        <section id="bookings-tab" class="admin-section active-section">
+            <div class="card">
+                <h3>Live Bookings</h3>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Reference</th>
+                                <th>Citizen Name</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-table-body">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citizens Tab -->
+        <section id="citizens-tab" class="admin-section hidden">
+            <div class="card">
+                <h3>Registered Citizens</h3>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID / Email</th>
+                                <th>Full Name</th>
+                                <th>Account Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="citizens-table-body">
+                            <!-- JS will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

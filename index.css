@@ -184,3 +184,31 @@ body {
 .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .footer-logo-icon { height: 25px; }
 .footer-email { color: var(--text-gray); text-decoration: none; }
+
+/* FORCE LIGHT MODE OVERRIDES */
+body.light-mode {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+body.light-mode .card, 
+body.light-mode .admin-sidebar, 
+body.light-mode .admin-select,
+body.light-mode .info-box {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .admin-table th, 
+body.light-mode .admin-table td {
+    color: #334155 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+body.light-mode h1, 
+body.light-mode h2, 
+body.light-mode h3 {
+    color: #0f172a !important;
+}
