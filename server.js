@@ -1,19 +1,20 @@
-<<<<<<< HEAD
-const express  = require('express');
-const cors     = require('cors');
-const dotenv   = require('dotenv');
-const emailjs  = require('@emailjs/nodejs');
-const path     = require('path');
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const path = require('path');
+const emailjs = require('@emailjs/nodejs');
+const { createClient } = require('@supabase/supabase-js');
 
-dotenv.config();
-
-const app  = express();
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 app.use(express.static(path.join(__dirname)));
+
+// Initialize Supabase with the ADMIN key
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 // ─── EMAIL ROUTE ──────────────────────────────────────────────────────────────
 app.post('/api/send-confirmation', async (req, res) => {
@@ -47,22 +48,7 @@ app.post('/api/send-confirmation', async (req, res) => {
     }
 });
 
-// ─── START SERVER ─────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-    console.log(`CivicSync server running at http://localhost:${PORT}`);
-});
-=======
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const { createClient } = require('@supabase/supabase-js');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Initialize Supabase with the ADMIN key
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+// ─── SUPABASE & ADMIN ROUTES ──────────────────────────────────────────────────
 
 // Middleware to check if the user is a Supervisor
 const verifySupervisor = async (req, res, next) => {
@@ -133,5 +119,7 @@ app.post('/api/register', async (req, res) => {
     res.status(200).json({ message: "Registration successful", user: data.user });
 });
 
-app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
->>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
+// ─── START SERVER ─────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+    console.log(`CivicSync server running at http://localhost:${PORT}`);
+});
