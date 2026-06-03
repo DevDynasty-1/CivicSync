@@ -1,4 +1,3 @@
-
 // ─── EMAILJS CONFIGURATION ──────────────────────────────────────────────────────
 // SETUP INSTRUCTIONS:
 // 1. Go to https://www.emailjs.com and create a free account
@@ -6,16 +5,6 @@
 // 3. Create an Email Template using the HTML in EMAIL_TEMPLATE_GUIDE below → copy Template ID
 // 4. Go to Account → API Keys → copy your Public Key
 // 5. Replace the three values below with yours
-//const EMAILJS_PUBLIC_KEY  = '2B0_LXRZs2DaE_qNJ';   // e.g. 'user_xxxxxxxxxxxx'
-//const EMAILJS_SERVICE_ID  = 'service_1c1z67a';   // e.g. 'service_abc123'
-//const EMAILJS_TEMPLATE_ID = 'template_5o42go2';  // e.g. 'template_xyz789'
-
-// EMAIL_TEMPLATE_GUIDE — paste this HTML into your EmailJS template body:
-// Template variables used: {{to_name}}, {{to_email}}, {{ref}}, {{office}},
-// {{address}}, {{date}}, {{time}}, {{booked_at}}, {{qr_image}}
-// Subject line: "CivicSync Booking Confirmed – {{ref}}"
-
-//emailjs.init(EMAILJS_PUBLIC_KEY);
 
 // ─── HOME AFFAIRS OFFICES (South Africa) ──────────────────────────────────────
 //>>>>>>> a2f345e6a75495b650157428d047f81e0de2a156
