@@ -18,7 +18,7 @@ function switchTab(tabName) {
     event.currentTarget.classList.add('active');
 }
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = '';
 
 // Function to fetch the JWT token for the logged-in admin
 async function getAuthToken() {

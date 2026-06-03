@@ -1,4 +1,6 @@
 // ─── EMAILJS CONFIGURATION ──────────────────────────────────────────────────────
+const BACKEND_URL = ''; // Leave this empty for automatic deployment routing!
+
 const HOME_AFFAIRS_OFFICES = [
   // Gauteng
   { id: 'sandton',    name: 'Sandton Home Affairs',                address: 'Sandton City, Cnr Rivonia Rd & 5th St, Sandton',   lat: -26.1076, lng: 28.0567, province: 'Gauteng' },
@@ -317,7 +319,7 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
 
   try {
       // 1. SAVE TO SUPABASE VIA BACKEND
-      const dbResponse = await fetch('http://localhost:3000/api/bookings', {
+      const dbResponse = await fetch(`${BACKEND_URL}/api/bookings`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -372,7 +374,7 @@ function generateQRDataURL(d) {
 
 async function sendConfirmationEmail(d, qrDataURL) {
   try {
-      const response = await fetch('http://localhost:3000/api/send-confirmation', {
+      const response = await fetch(`${BACKEND_URL}/api/send-confirmation`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

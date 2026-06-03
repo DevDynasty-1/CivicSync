@@ -1,4 +1,5 @@
-// settings.js — Settings Page
+// ─── SETTINGS.JS (SUPABASE + THEME INTEGRATED) ──────────────────────────────
+const BACKEND_URL = ''; // Leave empty for automatic routing
 
 // Get form elements
 const saveBtn = document.querySelector('.btn-save');
@@ -12,7 +13,7 @@ const infoBoxText = document.querySelector('.info-box-text');
 
 const themeKey = 'civicsync_theme';
 
-// Store original values
+// Store original values to track changes
 const originalValues = {
   inputs: {},
   toggles: {},
@@ -20,8 +21,10 @@ const originalValues = {
 };
 let originalThemeToggleValue = false;
 
+// ─── THEME LOGIC ───
 const applyTheme = (useLight) => {
   document.body.classList.toggle('light-theme', useLight);
+  document.body.classList.toggle('light-mode', useLight); // Support both class names
   localStorage.setItem(themeKey, useLight ? 'light' : 'dark');
 };
 
@@ -35,159 +38,146 @@ const loadThemeFromStorage = () => {
   originalThemeToggleValue = useLight;
 };
 
-// Load signed-in user data and populate form
-document.addEventListener('DOMContentLoaded', () => {
-  const userDataString = sessionStorage.getItem('civicsync_user');
+// ─── SUPABASE LOAD LOGIC ───
+document.addEventListener('DOMContentLoaded', async () => {
+  loadThemeFromStorage();
+
+  // Load User Data DIRECTLY from Supabase
+  const { data: { session }, error } = await window.supabase.auth.getSession();
   
-  if (userDataString) {
-    try {
-      const userData = JSON.parse(userDataString);
-      // Populate form fields with user data
-      if (textInputs[0]) textInputs[0].value = userData.name || '';
-      if (textInputs[1]) textInputs[1].value = userData.email || '';
-      if (textInputs[2]) textInputs[2].value = userData.phone || '';
-      
-      // Update "Logged in as" info box
-      if (infoBoxText) {
-        infoBoxText.textContent = `${userData.name || 'User'} (${userData.email || 'No email'})`;
-      }
-    } catch (e) {
-      console.error('Error parsing user data:', e);
-    }
-  } else {
-    // No user signed in - clear fields and show empty state
-    if (infoBoxText) {
-      infoBoxText.textContent = 'Not logged in';
-    }
-    // Clear all text inputs
-    textInputs.forEach(input => {
-      input.value = '';
-    });
+  if (error || !session) {
+      if (infoBoxText) infoBoxText.textContent = 'Not logged in';
+      window.location.href = '/login.html'; // Kick out if not logged in
+      return;
   }
 
-  loadThemeFromStorage();
+  const user = session.user;
+  const currentName = user.user_metadata?.full_name || 'Citizen';
+  const currentPhone = user.user_metadata?.phone || '';
   
+  // Populate the UI
+  if (infoBoxText) infoBoxText.textContent = `${currentName} (${user.email})`;
+  if (textInputs[0]) textInputs[0].value = currentName;
+  if (textInputs[1]) {
+      textInputs[1].value = user.email;
+      textInputs[1].disabled = true; // Security: Prevent changing email easily
+  }
+  if (textInputs[2]) textInputs[2].value = currentPhone;
+
   // Save original values on load
-  textInputs.forEach((input, index) => {
-    originalValues.inputs[index] = input.value;
-  });
+  textInputs.forEach((input, index) => originalValues.inputs[index] = input.value);
+  toggleSwitches.forEach((toggle, index) => originalValues.toggles[index] = toggle.checked);
+  selectDropdowns.forEach((select, index) => originalValues.selects[index] = select.value);
   
-  toggleSwitches.forEach((toggle, index) => {
-    originalValues.toggles[index] = toggle.checked;
-  });
-  
-  selectDropdowns.forEach((select, index) => {
-    originalValues.selects[index] = select.value;
-  });
+  trackChanges();
 });
 
-// Save changes
+// ─── SAVE CHANGES ───
 if (saveBtn) {
-  saveBtn.addEventListener('click', () => {
-    // Collect all form data
-    const formData = {
-      displayName: document.querySelector('input[type="text"]').value,
-      email: document.querySelector('input[type="email"]').value,
-      phone: document.querySelector('input[type="tel"]').value,
-      twoFactor: toggleSwitches[0].checked,
-      emailNotifications: toggleSwitches[1].checked,
-      smsNotifications: toggleSwitches[2].checked,
-      language: selectDropdowns[0].value,
-      theme: themeToggle && themeToggle.checked ? 'light' : 'dark'
-    };
+  saveBtn.addEventListener('click', async () => {
+    saveBtn.textContent = 'Saving...';
+    saveBtn.disabled = true;
+    
+    const newName = textInputs[0] ? textInputs[0].value.trim() : '';
+    const newPhone = textInputs[2] ? textInputs[2].value.trim() : '';
 
-    console.log('Saving settings:', formData);
+    // Send update to Supabase
+    const { data, error } = await window.supabase.auth.updateUser({
+        data: { full_name: newName, phone: newPhone }
+    });
 
-    if (themeToggle) {
-      applyTheme(themeToggle.checked);
-      originalThemeToggleValue = themeToggle.checked;
+    if (error) {
+        alert('Failed to save settings: ' + error.message);
+    } else {
+        alert('Settings saved successfully!');
+        if (infoBoxText) infoBoxText.textContent = `${newName} (${data.user.email})`;
+        
+        // Update original values so buttons grey out again
+        textInputs.forEach((input, index) => originalValues.inputs[index] = input.value);
+        if (themeToggle) {
+            applyTheme(themeToggle.checked);
+            originalThemeToggleValue = themeToggle.checked;
+        }
     }
-
-    alert('Settings saved successfully!');
-
-    // Update original values
-    textInputs.forEach((input, index) => {
-      originalValues.inputs[index] = input.value;
-    });
-
-    toggleSwitches.forEach((toggle, index) => {
-      originalValues.toggles[index] = toggle.checked;
-    });
-
-    selectDropdowns.forEach((select, index) => {
-      originalValues.selects[index] = select.value;
-    });
+    
+    saveBtn.textContent = 'Save Changes';
+    saveBtn.disabled = false;
+    trackChanges();
   });
 }
 
-// Cancel changes
+// ─── CANCEL CHANGES ───
 if (cancelBtn) {
   cancelBtn.addEventListener('click', () => {
     if (confirm('Discard all changes?')) {
       // Restore original values
-      textInputs.forEach((input, index) => {
-        input.value = originalValues.inputs[index];
-      });
+      textInputs.forEach((input, index) => input.value = originalValues.inputs[index]);
+      toggleSwitches.forEach((toggle, index) => toggle.checked = originalValues.toggles[index]);
+      selectDropdowns.forEach((select, index) => select.value = originalValues.selects[index]);
       
-      toggleSwitches.forEach((toggle, index) => {
-        toggle.checked = originalValues.toggles[index];
-      });
-
       if (themeToggle) {
         themeToggle.checked = originalThemeToggleValue;
         applyTheme(themeToggle.checked);
       }
       
-      selectDropdowns.forEach((select, index) => {
-        select.value = originalValues.selects[index];
-      });
-      
-      alert('Changes discarded.');
+      trackChanges(); // Instantly grey out the buttons
     }
   });
 }
 
-// Delete account
+// ─── DELETE ACCOUNT ───
 if (deleteBtn) {
-  deleteBtn.addEventListener('click', () => {
-    const confirmDelete = confirm(
-      'Are you sure you want to delete your account? This action cannot be undone. All your data will be permanently deleted.'
-    );
+  deleteBtn.addEventListener('click', async () => {
+    if (!confirm('Are you sure you want to completely delete your account? This action cannot be undone.')) return;
     
-    if (confirmDelete) {
-      const doubleConfirm = confirm(
-        'This is your final warning. Type your email to confirm deletion.'
-      );
-      
-      if (doubleConfirm) {
-        alert('Your account has been scheduled for deletion. You will receive a confirmation email.');
-        // In a real app, this would send a request to the server
-        window.location.href = 'index.html';
-      }
+    const doubleConfirm = confirm('This is your final warning. Click OK to confirm deletion.');
+    if (!doubleConfirm) return;
+
+    // Get the active session token
+    const { data: { session } } = await window.supabase.auth.getSession();
+    if (!session) return;
+
+    deleteBtn.textContent = "Deleting...";
+
+    try {
+        // Tell our backend to delete this specific user
+        const response = await fetch(`${BACKEND_URL}/api/user/delete-self`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${session.access_token}`
+            }
+        });
+
+        if (response.ok) {
+            await window.supabase.auth.signOut(); // Log out from browser
+            alert('Account permanently deleted.');
+            window.location.href = '/register.html'; 
+        } else {
+            alert('Failed to delete account. Please try again.');
+            deleteBtn.textContent = "Delete Account";
+        }
+    } catch (err) {
+        alert('Server error.');
+        deleteBtn.textContent = "Delete Account";
     }
   });
 }
 
-// Track changes
+// ─── TRACK CHANGES FOR BUTTON STATE ───
 const trackChanges = () => {
   let hasChanges = false;
   
   textInputs.forEach((input, index) => {
-    if (input.value !== originalValues.inputs[index]) {
-      hasChanges = true;
-    }
+    if (input.value !== originalValues.inputs[index]) hasChanges = true;
   });
   
   toggleSwitches.forEach((toggle, index) => {
-    if (toggle.checked !== originalValues.toggles[index]) {
-      hasChanges = true;
-    }
+    if (toggle.checked !== originalValues.toggles[index]) hasChanges = true;
   });
   
   selectDropdowns.forEach((select, index) => {
-    if (select.value !== originalValues.selects[index]) {
-      hasChanges = true;
-    }
+    if (select.value !== originalValues.selects[index]) hasChanges = true;
   });
 
   if (themeToggle && themeToggle.checked !== originalThemeToggleValue) {
@@ -211,13 +201,9 @@ const trackChanges = () => {
 };
 
 // Add change listeners
-textInputs.forEach(input => {
-  input.addEventListener('change', trackChanges);
-});
-
-toggleSwitches.forEach(toggle => {
-  toggle.addEventListener('change', trackChanges);
-});
+textInputs.forEach(input => input.addEventListener('input', trackChanges));
+toggleSwitches.forEach(toggle => toggle.addEventListener('change', trackChanges));
+selectDropdowns.forEach(select => select.addEventListener('change', trackChanges));
 
 if (themeToggle) {
   themeToggle.addEventListener('change', () => {
@@ -225,10 +211,6 @@ if (themeToggle) {
     trackChanges();
   });
 }
-
-selectDropdowns.forEach(select => {
-  select.addEventListener('change', trackChanges);
-});
 
 // Initialize change tracking
 trackChanges();
